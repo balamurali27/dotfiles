@@ -15,11 +15,12 @@ config add <filepath>
 ## To use the dotfiles quickly
 Clone the repo with
 ```
-git clone --separate-git-dir=$HOME/.myconf /path/to/repo $HOME/myconf-tmp
+git clone --separate-git-dir=$HOME/.myconf https://github.com/balamurali27/dotfiles $HOME/myconf-tmp
 ```
 copy the necessary dotfiles to home directory, then
 ```
-rm -r ~/myconf-tmp/
-alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+rm -rf ~/myconf-tmp/
+echo "alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'" >> ~/.zshrc
+config config status.showUntrackedFiles no
 ```
 Then use the alias ```config``` to work with the repo
