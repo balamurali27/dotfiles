@@ -199,12 +199,12 @@ exec --no-startup-id ssh-agent -s
 exec --no-startup-id udiskie --tray
 #prevent dosbox from being floating
 for_window [title="DOSBox"] floating disable
-#touchpad
-exec --no-startup-id xinput set-prop 13 308 1 #tap to click
-exec --no-startup-id xinput set-prop 13 290 1 #natural scrolling
-exec --no-startup-id xinput set-prop 13 316 1 #disable while typing
 #custom config for i3
 default_border pixel 1
 #commands that may change from distro to distro
-exec --no-startup-id /usr/lib/polkit-gnome-authentication-agent-1
-exec --no-startup-id /usr/lib64/libexec/kdeconnectd
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/kdeconnectd
+#touchpad
+exec --no-startup-id xinput set-prop 13 305 1 #tap to click
+exec --no-startup-id xinput set-prop 13 287 1 #natural scrolling
+exec --no-startup-id xinput set-prop 13 313 1 #disable while typing

@@ -2,7 +2,7 @@
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
-URxvt*perl-ext-common: tabbed,eval,selection,selection-to-clipboard
+URxvt*perl-ext-common: tabbed,eval,selection,selection-to-clipboard,resize-font
 URxvt*scrollBar: false
 URxvt*highlightSelection: true
 !URxvt*cursorBlink: 1
