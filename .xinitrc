@@ -5,7 +5,8 @@ export SSH_AUTH_SOCK
 session=${1:-i3}
 
 case $session in
-    i3|i3wm           ) exec i3;;
-    kde               ) exec startkde;;
-    *		      ) exec $1;;
+i3|i3wm		) exec i3;;
+awesome		) exec awesome;;
+kde		) exec startkde;;
+*		) exec $1;;
 esac

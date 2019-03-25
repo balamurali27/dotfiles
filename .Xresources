@@ -1,14 +1,21 @@
 #include "/home/balu/.Xresources.d/Xresources-themes-master/xcolors-material.Xresources"
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
-URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true
-URxvt*perl-ext-common: tabbed,eval,selection,selection-to-clipboard,resize-font
+!URxvt.font:-*-terminus-medium-r-normal--16-*-*-*-*-*-*-*
+!URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
+!URxvt*font: xft:Iosevka Term:style=Regular:size=12:antialias=true
+*.font: xft:Iosevka Term:style=Regular:size=12
+*.boldFont: xft:Iosevka Term:style=Bold:size=12
+*.italicFont: xft:Iosevka Term:style=Italic:size=12
+*.boldItalicFont: xft:Iosevka Term:style=Bold Italic:size=12
+URxvt*perl-ext-common: tabbed,eval,selection,selection-to-clipboard,resize-font,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 URxvt*scrollBar: false
 URxvt*highlightSelection: true
-!URxvt*cursorBlink: 1
-URxvt*transparent: true
 ! URxvt*shading: 99 to 0 darkens, 101 to 200 lightens
-URxvt*shading: 15
+!URxvt*shading: 15
+!URxvt*transparent: true
 URxvt.keysym.Home: \033[7~
 URxvt.keysym.End: \033[8~
 URxvt.keysym.KP_Home: \033[7~
@@ -16,3 +23,9 @@ URxvt.keysym.KP_End:  \033[8~
 ! for the weird ISO popup at bottom left to stop
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
