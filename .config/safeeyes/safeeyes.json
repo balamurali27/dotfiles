@@ -32,7 +32,7 @@
             "version": "0.0.1"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "id": "audiblealert",
             "settings": {
                 "pre_break_alert": true
