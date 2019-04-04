@@ -171,10 +171,14 @@ bar {
         status_command i3status
 }
 
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+# # Pulse Audio controls
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+# Alsa controls
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- # Decrease volume
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ # Increase volume
+bindsym XF86AudioMute exec amixer set Master 1+ toggle # Mute / Unmute
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
@@ -188,7 +192,7 @@ bindsym Print exec scrot -e 'mv $f ~/Pictures/'
 bindsym $mod+shift+x exec betterlockscreen -l dim
 #startup things
 exec_always --no-startup-id feh --recursive --randomize --bg-scale /home/balu/.config/variety/Downloaded
-exec_always --no-startup-id betterlockscreen -u /home/balu/.config/variety/Downloaded/wallhaven_alpha_wallhaven_cc_search_q__categories_100_purity_100_ratios_16x9_topRange_3M_sorting_toplist_order_desc_page_2
+exec_always --no-startup-id betterlockscreen -u /home/balu/.config/variety/Downloaded/wallhaven*
 exec --no-startup-id urxvtd -q -o
 exec --no-startup-id kdeconnect-indicator
 exec --no-startup-id variety
