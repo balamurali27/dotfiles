@@ -6,7 +6,6 @@ endif
 
 set number relativenumber
 set mouse=a
-filetype plugin on
 set clipboard=unnamedplus "to copy paste across terminals with \yy and p
 
 call plug#begin()
@@ -27,8 +26,12 @@ let g:airline_powerline_fonts = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="tabdo"
+" to make ultisnips look for private snippets in .UltiSnips directory in current workspace
+let g:UltiSnipsSnippetsDir=".UltiSnips"
+let g:UltiSnipsSnippetDirectories=[getcwd()."/".g:UltiSnipsSnippetsDir, "UltiSnips"]
 
 let g:NERDSpaceDelims = 1
 " Enable trimming of trailing whitespace when uncommenting

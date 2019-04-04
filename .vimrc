@@ -1,7 +1,3 @@
-set number relativenumber
-set mouse=a
-filetype plugin on
-set clipboard=unnamedplus "to copy paste across terminals with yy and p
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -24,12 +20,20 @@ call plug#end()
 
 "autocmd! FileType c,cpp,java,php call CSyntaxAfter() "for cSyntaxAfter plugin
 
+set number relativenumber
+set mouse=a
+set clipboard=unnamedplus "to copy paste across terminals with yy and p
+
 let g:airline_powerline_fonts = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="tabdo"
+" to make ultisnips look for private snippets in .UltiSnips directory in current workspace
+let g:UltiSnipsSnippetsDir=".UltiSnips"
+let g:UltiSnipsSnippetDirectories=[getcwd()."/".g:UltiSnipsSnippetsDir, "UltiSnips"]
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
