@@ -29,6 +29,9 @@ theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
+--------------------------------------
+--  custom props for widgets start  --
+--------------------------------------
 
 theme.widget_main_color = "#74aeab"
 theme.widget_red = "#e53935"
@@ -36,6 +39,10 @@ theme.widget_yellow = "#c0ca33"
 theme.widget_green = "#43a047"
 theme.widget_black = "#000000"
 theme.widget_transparent = "#00000000"
+------------------------------------
+--  custom props for widgets end  --
+------------------------------------
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
@@ -63,8 +70,6 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
-notification_width = dpi(48)
-notification_height = dpi(30)
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]

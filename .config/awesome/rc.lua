@@ -72,7 +72,7 @@ awful.layout.layouts = {
 	-- awful.layout.suit.tile.left,
 	-- awful.layout.suit.tile.bottom,
 	-- awful.layout.suit.tile.top,
-	awful.layout.suit.spiral,
+	-- awful.layout.suit.spiral,
 	-- awful.layout.suit.spiral.dwindle,
 	-- awful.layout.suit.max,
 	-- awful.layout.suit.max.fullscreen,
@@ -481,7 +481,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 	  awful.rules.rules = {
 		  -- All clients will match this rule.
 		  { rule = { },
-		  properties = { border_width = beautiful.border_width,
+		  properties = { border_width = beautiful.border_width, size_hints_honor = false,
 		  border_color = beautiful.border_normal,
 		  focus = awful.client.focus.filter,
 		  raise = true,

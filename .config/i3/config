@@ -190,6 +190,9 @@ bindsym XF86AudioPrev exec playerctl previous
 #custom keybinding
 bindsym Print exec scrot -e 'mv $f ~/Pictures/'
 bindsym $mod+shift+x exec betterlockscreen -l dim
+#commands that may change from distro to distro
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/kdeconnectd
 #startup things
 exec_always --no-startup-id feh --recursive --randomize --bg-scale /home/balu/.config/variety/Downloaded
 exec_always --no-startup-id betterlockscreen -u /home/balu/.config/variety/Downloaded/wallhaven*
@@ -205,9 +208,6 @@ exec --no-startup-id udiskie --tray
 for_window [title="DOSBox"] floating disable
 #custom config for i3
 default_border pixel 1
-#commands that may change from distro to distro
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id /usr/lib/kdeconnectd
 #touchpad
 exec --no-startup-id xinput set-prop 13 305 1 #tap to click
 exec --no-startup-id xinput set-prop 13 287 1 #natural scrolling

@@ -24,7 +24,7 @@ set number relativenumber
 set mouse=a
 set clipboard=unnamedplus "to copy paste across terminals with yy and p
 
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"

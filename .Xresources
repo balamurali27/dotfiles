@@ -1,20 +1,23 @@
 #include "/home/balu/.Xresources.d/Xresources-themes-master/iterm-FirefoxDev.Xresources"
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+! open new terminal in current directory
+URxvt.keysym.Shift-Control-N: urxvtc\n
 *.font:-*-terminus-medium-r-normal--16-*-*-*-*-*-*-*
 !URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
 ! *.font: xft:Iosevka Term:style=Regular:size=12
 ! *.boldFont: xft:Iosevka Term:style=Bold:size=12
 ! *.italicFont: xft:Iosevka Term:style=Italic:size=12
 ! *.boldItalicFont: xft:Iosevka Term:style=Bold Italic:size=12
-URxvt*perl-ext-common: tabbed,eval,selection,selection-to-clipboard,resize-font,matcher
+URxvt*perl-ext-common: eval,selection,selection-to-clipboard,resize-font,matcher
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 URxvt*scrollBar: false
 URxvt*highlightSelection: true
 ! URxvt*shading: 99 to 0 darkens, 101 to 200 lightens
-! URxvt*shading: 15
+! URxvt*shading: 10
 ! URxvt*transparent: true
+! URxvt*blurRadius: 5
 URxvt.keysym.Home: \033[7~
 URxvt.keysym.End: \033[8~
 URxvt.keysym.KP_Home: \033[7~
