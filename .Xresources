@@ -15,6 +15,10 @@ URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 URxvt*scrollBar: false
 URxvt*highlightSelection: true
+! sway specific for transparency
+! URxvt*depth: 32
+! URxvt*background: rgba:0000/0000/0200/c800
+! sway specific
 ! URxvt*shading: 99 to 0 darkens, 101 to 200 lightens
 ! URxvt*shading: 10
 ! URxvt*transparent: true
