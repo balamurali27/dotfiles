@@ -1,5 +1,5 @@
 # dotfiles
-Repo to keep my dotfiles in sync
+Repo to keep my dotfiles in sync.
 Repo made based on [this](https://news.ycombinator.com/item?id=11070797) comment.
 
 ## Repo created using
