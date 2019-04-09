@@ -2,7 +2,8 @@
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! open new terminal in current directory
-URxvt.keysym.Shift-Control-N: urxvtc\n
+! windows key is Mod4, enter is Return
+URxvt.keysym.Shift-Mod4-Return: urxvtc\n
 *.font:-*-terminus-medium-r-normal--16-*-*-*-*-*-*-*
 !URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
 ! *.font: xft:Iosevka Term:style=Regular:size=12
