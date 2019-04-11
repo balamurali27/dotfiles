@@ -16,7 +16,7 @@ run kdeconnect-indicator
 run variety
 run safeeyes
 run redshift-gtk
-run ssh-agent -s
+run ssh-agent -s -D
 run udiskie --tray
 run nm-applet
 #touchpad

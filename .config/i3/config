@@ -176,9 +176,9 @@ bar {
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 # bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 # Alsa controls
-bindsym XF86AudioLowerVolume exec amixer set Master 5%- # Decrease volume
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ # Increase volume
-bindsym XF86AudioMute exec amixer set Master 1+ toggle # Mute / Unmute
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- # Decrease volume
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ # Increase volume
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle # Mute / Unmute
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
@@ -202,7 +202,7 @@ exec --no-startup-id variety
 exec --no-startup-id safeeyes
 exec --no-startup-id redshift-gtk
 exec --no-startup-id dunst
-exec --no-startup-id ssh-agent -s
+exec --no-startup-id ssh-agent -s -D
 exec --no-startup-id udiskie --tray
 #prevent dosbox from being floating
 for_window [title="DOSBox"] floating disable

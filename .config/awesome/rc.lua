@@ -260,6 +260,9 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 	  awful.key({}, "XF86MonBrightnessDown", function()
 		  awful.util.spawn("light -U 5", false)
 	  end),
+	  awful.key({modkey, "Shift"}, "x",	function()
+		  awful.util.spawn("betterlockscreen -l dim")
+	  end),
 	  awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
 	  {description="show help", group="awesome"}),
 	  awful.key({ modkey,           }, "Left",   awful.tag.viewprev,

@@ -5,7 +5,8 @@
 " endif
 set number relativenumber
 set mouse=a
-set clipboard=unnamedplus "to copy paste across terminals with \yy and p
+"to copy paste across terminals with \yy and p
+set clipboard=unnamedplus
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
@@ -32,3 +33,6 @@ let g:NERDSpaceDelims = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 map <C-n> :NERDTreeToggle<CR>
+" dark colors for line number and comments
+hi LineNr ctermfg=8
+hi comment ctermfg=7
