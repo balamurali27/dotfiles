@@ -8,7 +8,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term termite
+set $term urxvtc
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 set $menu i3-dmenu-desktop | xargs swaymsg exec
@@ -27,7 +27,7 @@ output * bg $wallpaper fill
 ### Key bindings
     
     # start a terminal
-    bindsym $mod+Return exec $term && set $temp $split && set $split $nextSplit && set $nextSplit $temp
+    bindsym $mod+Return exec $term
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -188,21 +188,24 @@ bindsym XF86AudioPrev exec playerctl previous
 #custom keybinding
 
 # add grim shortcut here
-# bindsym $mod+shift+x exec betterlockscreen -l dim
+bindsym Print exec grim ~/Pictures/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+bindsym ctrl+Print exec grim -g "$(slurp)" ~/Pictures/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+
+bindsym $mod+shift+x exec swaylock -i $wallpaper
 
 # commands that may change from distro to distro
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-# exec --no-startup-id /usr/lib/kdeconnectd
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/kdeconnectd
 # startup things
-# exec --no-startup-id urxvtd -q -o
-# exec --no-startup-id kdeconnect-indicator
-# exec --no-startup-id variety
-# exec --no-startup-id safeeyes
-# exec --no-startup-id redshift-gtk
-# exec --no-startup-id mako
-# exec --no-startup-id ssh-agent -s
-# exec --no-startup-id udiskie --tray
+exec --no-startup-id urxvtd -q -o
+exec --no-startup-id kdeconnect-indicator
+exec --no-startup-id variety
+exec --no-startup-id safeeyes
+exec --no-startup-id redshift-gtk
+exec --no-startup-id mako
+exec --no-startup-id ssh-agent -s -D
+exec --no-startup-id udiskie
 #prevent dosbox from being floating
 for_window [title="DOSBox"] floating disable
-#custom config for i3
+#custom config for no titlebar
 default_border pixel 1

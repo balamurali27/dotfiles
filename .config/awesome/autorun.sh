@@ -15,7 +15,7 @@ run betterlockscreen -u /home/balu/.config/variety/Downloaded/wallhaven*
 run kdeconnect-indicator
 run variety
 run safeeyes
-run redshift-gtk
+run fluxgui
 run ssh-agent -s -D
 run udiskie --tray
 run nm-applet

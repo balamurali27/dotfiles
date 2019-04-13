@@ -7,7 +7,7 @@ clickable_url = true
 font =  iosevka term  12
 #fullscreen = true
 #icon_name = terminal
-#mouse_autohide = false
+mouse_autohide = false
 #scroll_on_output = false
 #scroll_on_keystroke = true
 # Length of the scrollback buffer, 0 disabled the scrollback buffer
@@ -15,10 +15,10 @@ font =  iosevka term  12
 scrollback_lines = 10000
 #search_wrap = true
 #urgent_on_bell = true
-hyperlinks = false
+hyperlinks = true
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
-#browser = xdg-open
+browser = xdg-open
 
 # "system", "on" or "off"
 #cursor_blink = system
@@ -44,8 +44,8 @@ hyperlinks = false
 foreground      = #c5c8c6
 foreground_bold = #c5c8c6
 cursor          = #c5c8c6
-background      = #1d1f21
-
+background = rgba(0, 0, 0, 0.8)
+# background      = #1d1f21
 # black
 color0  = #282a2e
 color8  = #373b41
