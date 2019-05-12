@@ -1,16 +1,16 @@
-#include "/home/balu/.Xresources.d/custom-themes/naruto.Xresources"
+#include "/home/balu/.Xresources.d/custom-themes/narutov2.Xresources"
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! open new terminal in current directory
 ! windows key is Mod4, enter is Return
 URxvt.keysym.Shift-Mod4-Return: urxvtc\n
-*.font:-*-terminus-medium-r-normal--16-*-*-*-*-*-*-*
+! *.font:-*-terminus-medium-r-normal--16-*-*-*-*-*-*-*
 !URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
-! *.font: xft:Iosevka Term:style=Regular:size=12
-! *.boldFont: xft:Iosevka Term:style=Bold:size=12
-! *.italicFont: xft:Iosevka Term:style=Italic:size=12
-! *.boldItalicFont: xft:Iosevka Term:style=Bold Italic:size=12
-URxvt*perl-ext-common: eval,selection,selection-to-clipboard,resize-font,matcher
+*.font: xft:Iosevka Term:style=Regular:size=12
+*.boldFont: xft:Iosevka Term:style=Bold:size=12
+*.italicFont: xft:Iosevka Term:style=Italic:size=12
+*.boldItalicFont: xft:Iosevka Term:style=Bold Italic:size=12
+URxvt*perl-ext-common: eval,selection,resize-font,matcher
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 URxvt*scrollBar: false

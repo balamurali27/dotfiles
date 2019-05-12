@@ -13,9 +13,12 @@ local theme = {}
 
 theme.font          = "fontawesome 8"
 
-theme.bg_normal     = "#222222"
+theme.bg_normal     = "#222222CC"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
+-- theme.bg_normal     = "#020a0b66"
+-- theme.bg_focus      = "#002434"
+-- theme.bg_urgent     = "#b70a29"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
@@ -27,7 +30,7 @@ theme.fg_minimize   = "#ffffff"
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_focus  = "#173e6f"
 theme.border_marked = "#91231c"
 --------------------------------------
 --  custom props for widgets start  --
@@ -131,7 +134,8 @@ theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
+    -- theme.menu_height, theme.bg_focus, theme.fg_focus
+        theme.menu_height, "#000000", "#558eff"
 )
 
 -- Define the icon theme for application icons. If not set then the icons

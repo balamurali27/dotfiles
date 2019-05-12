@@ -54,8 +54,28 @@ editor_cmd = terminal .. " -e " .. editor
 ----------------------
 --  custom widgets  --
 ----------------------
+--https://github.com/streetturtle/awesome-wm-widgets
 local volumearc_widget= require("awesome-wm-widgets.volumearc-widget.volumearc")
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+--https://github.com/pltanton/net_widgets
+local net_widgets = require("net_widgets")
+net_wireless = net_widgets.wireless({
+	interface="wlp2s0",
+	onclick = terminal .. " -e nmtui ",
+	popup_signal = true
+})
+net_wired= net_widgets.indicator({
+	interfaces = {"enp1s0", "enp0s20f0u2"}
+})
+sprtr = wibox.widget.textbox()
+sprtr:set_text(" ")
+-----------------------
+--  xdg_menu config  --
+-----------------------
+-- update menu with the command 
+-- xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu >~/.config/awesome/archmenu.lua
+xdg_menu = require("archmenu")
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -94,9 +114,11 @@ myawesomemenu = {
 	{ "quit", function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-{ "open terminal", terminal }
-				  }
+mymainmenu = awful.menu({ items = {
+	{ "awesome", myawesomemenu, beautiful.awesome_icon },
+	{ "Applications", xdgmenu },
+	{ "open terminal", terminal }
+}
 			  })
 
 			  mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
@@ -214,10 +236,21 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 				  s.mytasklist, -- Middle widget
 				  { -- Right widgets
 				  layout = wibox.layout.fixed.horizontal,
+				  sprtr,
 				  wibox.widget.systray(),
+				  sprtr,
+				  net_wireless,
+				  sprtr,
+				  net_wired,
+				  sprtr,
+				  brightness_widget,
+				  sprtr,
 				  batteryarc_widget,
+				  sprtr,
 				  volumearc_widget,
+				  sprtr,
 				  mytextclock,
+				  sprtr,
 				  s.mylayoutbox,
 			  },
 		  }
@@ -261,7 +294,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 		  awful.util.spawn("light -U 5", false)
 	  end),
 	  awful.key({modkey, "Shift"}, "x",	function()
-		  awful.util.spawn("betterlockscreen -l dim")
+		  awful.spawn.with_shell("~/.config/awesome/i3lockcommand.sh")
 	  end),
 	  awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
 	  {description="show help", group="awesome"}),

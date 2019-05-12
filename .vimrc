@@ -3,11 +3,12 @@
     " \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 " endif
+set number relativenumber
+set mouse=a
+set clipboard=unnamedplus "to copy paste across terminals with yy and p
 call plug#begin()
 Plug 'tpope/vim-sensible'
-Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
@@ -15,10 +16,9 @@ Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-surround'
 Plug 'townk/vim-autoclose'
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
-set number relativenumber
-set mouse=a
-set clipboard=unnamedplus "to copy paste across terminals with yy and p
 " let g:airline_powerline_fonts = 1
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -32,5 +32,7 @@ let g:UltiSnipsSnippetDirectories=[getcwd()."/".g:UltiSnipsSnippetsDir, "UltiSni
 let g:NERDSpaceDelims = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+" dark colors for line number and comments
 map <C-n> :NERDTreeToggle<CR>
-highlight LineNr ctermfg=grey
+hi LineNr ctermfg=8
+hi comment ctermfg=7

@@ -1,0 +1,20 @@
+[Unit]
+Description = Lock screen when going to sleep/suspend
+Before=sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStart= i3lock --clock  --timecolor=ffffffff \
+	--date-align 0 --datecolor=ffffffff \
+	--indicator --insidecolor=000000AA --keyhlcolor=d04e0bff \
+	--ringcolor=ffffffff --separatorcolor=00000000 \
+	--verifcolor=ffffffff --insidevercolor=00000000 --ringvercolor=ffffffff \
+	--insidewrongcolor=b70a29ff --ringwrongcolor=ffffffff \
+	--wrongcolor=ffffffff \
+	--blur=5
+TimeoutSec=infinity
+
+[Install]
+WantedBy=sleep.target

@@ -1,0 +1,10 @@
+[Unit]
+Description = kill firefox before going into suspend-then-hibernate
+Before=suspend-then-hibernate.target
+
+[Service]
+User=%I
+ExecStart=/usr/bin/wmctrl -c firefox
+
+[Install]
+WantedBy=suspend-then-hibernate.target
