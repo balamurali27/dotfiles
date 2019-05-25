@@ -296,6 +296,9 @@ mymainmenu = awful.menu({ items = {
 	  awful.key({modkey, "Shift"}, "x",	function()
 		  awful.spawn.with_shell("~/.config/awesome/i3lockcommand.sh")
 	  end),
+	  awful.key({}, "Print", function()
+		  awful.util.spawn("scrot -e 'mv $f ~/Pictures/'")
+	  end),
 	  awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
 	  {description="show help", group="awesome"}),
 	  awful.key({ modkey,           }, "Left",   awful.tag.viewprev,

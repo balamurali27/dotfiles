@@ -1,11 +1,12 @@
-#include "/home/balu/.Xresources.d/custom-themes/narutov2.Xresources"
+! #include "/home/balu/.Xresources.d/custom-themes/narutov2.Xresources"
+#include "/home/balu/.Xresources.d/Xresources-themes-master/nord.Xresources"
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! open new terminal in current directory
 ! windows key is Mod4, enter is Return
 URxvt.keysym.Shift-Mod4-Return: urxvtc\n
 ! *.font:-*-terminus-medium-r-normal--16-*-*-*-*-*-*-*
-!URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
+! URxvt*font: xft:DejaVu Sans Mono:size=10:antialias=true
 *.font: xft:Iosevka Term:style=Regular:size=12
 *.boldFont: xft:Iosevka Term:style=Bold:size=12
 *.italicFont: xft:Iosevka Term:style=Italic:size=12
@@ -15,10 +16,9 @@ URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 URxvt*scrollBar: false
 URxvt*highlightSelection: true
-! sway specific for transparency
+! for true transparency
 ! URxvt*depth: 32
 ! URxvt*background: rgba:0000/0000/0200/c800
-! sway specific
 ! URxvt*shading: 99 to 0 darkens, 101 to 200 lightens
 ! URxvt*shading: 10
 ! URxvt*transparent: true
