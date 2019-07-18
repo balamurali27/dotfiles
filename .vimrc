@@ -15,7 +15,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-surround'
-Plug 'townk/vim-autoclose'
+" Plug 'townk/vim-autoclose'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 call plug#end()

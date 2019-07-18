@@ -37,46 +37,39 @@ browser = xdg-open
 
 # "off", "left" or "right"
 #scrollbar = off
+# Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+# Copyright (c) 2016-present Sven Greb <code@svengreb.de>
+
+# Project:    Nord Termite
+# Repository: https://github.com/arcticicestudio/nord-termite
+# License:    MIT
 
 [colors]
+cursor = #d8dee9
+cursor_foreground = #2e3440
 
-# special
-foreground      = #c5c8c6
-foreground_bold = #c5c8c6
-cursor          = #c5c8c6
-background = rgba(0, 0, 0, 0.8)
-# background      = #1d1f21
-# black
-color0  = #282a2e
-color8  = #373b41
+foreground = #d8dee9
+foreground_bold = #d8dee9
+background = #2e3440
 
-# red
-color1  = #b70a29
-color9  = #de0c32
+highlight = #4c566a
 
-# green
-color2  = #e1e11f
-color10 = #ffff23
-
-# yellow
-color3  = #d06e3c
-color11 = #ff874a
-
-# blue
-color4  = #d04e0b
-color12 = #ff600d
-
-# magenta
-color5  = #173e6f
-color13 = #358eff
-
-# cyan
-color6  = #b4b9c5
-color14 = #bdc2cf
-
-# white
-color7  = #707880
-color15 = #c5c8c6
+color0  = #3b4252
+color1  = #bf616a
+color2  = #a3be8c
+color3  = #ebcb8b
+color4  = #81a1c1
+color5  = #b48ead
+color6  = #88c0d0
+color7  = #e5e9f0
+color8  = #4c566a
+color9  = #bf616a
+color10 = #a3be8c
+color11 = #ebcb8b
+color12 = #81a1c1
+color13 = #b48ead
+color14 = #8fbcbb
+color15 = #eceff4
 
 [hints]
 ; font = Monospace 14

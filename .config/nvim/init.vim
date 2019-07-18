@@ -4,6 +4,9 @@
 	" autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 " endif
 set number relativenumber mouse=a tabstop=8 shiftwidth=8
+set foldlevelstart=99 foldmethod=syntax
+" to reduce delay when going to normal mode from insert mode
+set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
 " make html less lengthy
@@ -12,11 +15,14 @@ autocmd	BufReadPre *.html set tabstop=4 shiftwidth=4
 set clipboard=unnamedplus
 
 call plug#begin()
+" Color
 Plug 'arcticicestudio/nord-vim'
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdcommenter'
+
+" HTML
 Plug 'mattn/emmet-vim'
-Plug 'scrooloose/nerdtree'
+
+" Editing
+Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
@@ -26,31 +32,43 @@ Plug 'townk/vim-autoclose'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/vim-easy-align'
 call plug#end()
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " nord
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
+let g:nord_italic                        = 1
+let g:nord_underline                     = 1
+let g:nord_italic_comments               = 1
 let g:nord_cursor_line_number_background = 1
 set cursorline
 colorscheme nord
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger             = "<tab>"
+let g:UltiSnipsJumpForwardTrigger        = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
 " let g:UltiSnipsEditSplit="tabdo"
-let g:snips_author="Balamurali M"
+let g:snips_author                       = "Balamurali M"
 " to make ultisnips look for private snippets in .UltiSnips directory in current workspace
-let g:UltiSnipsSnippetsDir=".UltiSnips"
-let g:UltiSnipsSnippetDirectories=[getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal.snippets", "UltiSnips"]
+let g:UltiSnipsSnippetsDir               = ".UltiSnips"
+let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal.snippets", "UltiSnips"]
 
-let g:NERDSpaceDelims = 1
+let g:NERDSpaceDelims                    = 1
 " Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
+let g:NERDTrimTrailingWhitespace         = 1
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+" Directory listing with Netrw
+let g:netrw_banner                       = 0
+let g:netrw_liststyle                    = 3
+let g:netrw_browse_split                 = 4
+let g:netrw_altv                         = 1
+let g:netrw_winsize                      = 25
+nnoremap <C-n> :Vex<CR>
 
 " dark colors for line number and comments (for custom colorscheme)
 " highlight LineNr ctermfg=8

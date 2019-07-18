@@ -8,13 +8,13 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term urxvtc
+set $term termite
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 set $menu i3-dmenu-desktop | xargs swaymsg exec
 
 # command to get 1 file from variety folder at random and set as wallpaper
-set $wallpaper `ls ~/.config/variety/Downloaded/wallhaven*/* | shuf | tail -n 1`
+set $wallpaper `ls ~/.config/variety/Downloaded/wallhaven*/* | shuf -n 1`
 output * bg $wallpaper fill
 
 ## Input configuration

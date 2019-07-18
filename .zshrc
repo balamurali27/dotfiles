@@ -39,7 +39,7 @@ ZSH_THEME="alien-minimal/alien-minimal" #alien-minimal/alien-minimal,lambda-gits
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -96,3 +96,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias config='/usr/bin/git --git-dir=/home/balu/.myconf/ --work-tree=/home/balu'
 source /etc/profile.d/vte.sh
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/.gem"
+export PATH="$GEM_HOME/ruby/2.6.0/bin:$PATH"
