@@ -12,6 +12,10 @@ and adding files with
 ```
 config add <filepath>
 ```
+## Quick setup with wget
+```
+ sh -c "$(wget -O - https://raw.githubusercontent.com/balamurali27/dotfiles/master/.config/homesetup.sh)"
+ ```
 ## To use the dotfiles quickly
 Clone the repo with
 ```
@@ -24,3 +28,4 @@ echo "alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'" >>
 config config status.showUntrackedFiles no
 ```
 Then use the alias ```config``` to work with the repo
+
