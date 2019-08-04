@@ -5,14 +5,16 @@
 " endif
 set number relativenumber mouse=a tabstop=8 shiftwidth=8
 set foldlevelstart=99 foldmethod=syntax
-" to reduce delay when going to normal mode from insert mode
+" reduce delay when going to normal mode from insert mode
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
 " make html less lengthy
 autocmd	BufReadPre *.html set tabstop=4 shiftwidth=4
-"to copy paste across terminals with y and p
+" enable copy paste across terminals with y and p
 set clipboard=unnamedplus
+" enable spell check in comments and documents
+set spell spelllang=en_gb
 
 call plug#begin()
 " Color
@@ -86,4 +88,6 @@ nnoremap <space>/ :BLines<cr>
 nnoremap <space><space> :Buffers<cr>
 " fuzzy find text in the working directory
 nnoremap <space>r :Rg
+" fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
+nnoremap <space>c :Commands<cr>
 
