@@ -20,7 +20,7 @@ echo
 wget -O $HOME/Downloads/caps2esc-latest.tar.gz https://github.com/oblitum/caps2esc/archive/v1.0.4.tar.gz
 # compile in different terminal
 gnome-terminal -- \
-"cd $HOME/Downloads/caps2esc-1.0.4/ && \
+"cd $HOME/Downloads/ && \
 tar -xzvf caps2esc-latest.tar.gz && \
 gcc caps2esc.c -o caps2esc -I/usr/include/libevdev-1.0 -levdev -ludev && \
 ./caps2esc" \
