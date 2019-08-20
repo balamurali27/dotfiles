@@ -99,3 +99,6 @@ source /etc/profile.d/vte.sh
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/ruby/2.6.0/bin:$PATH"
+alias v="nvim"
+alias o="xdg-open \`fzf\`"
+alias vconfig="v ~/.config/nvim/init.vim"

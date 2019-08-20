@@ -13,21 +13,15 @@ echo
 echo $pass | sudo -S apt update -y
 echo Installing packages...
 echo
-echo $pass | sudo -S apt install -y wget git curl tmux neovim util-linux dconf-tools dconf-gsettings-backend dconf-cli dconf-service uuid-runtime python-dev python-pip python3-dev python3-pip
-# XXX script works fine till this point
+echo $pass | sudo -S apt install -y wget git curl tmux neovim util-linux \
+dconf-tools dconf-gsettings-backend dconf-cli dconf-service uuid-runtime \
+python-dev python-pip python3-dev python3-pip libudev-dev
 echo Getting caps2esc..
 echo
 wget -O $HOME/Downloads/caps2esc-latest.tar.gz https://github.com/oblitum/caps2esc/archive/v1.0.4.tar.gz
-# compile in different terminal
-gnome-terminal -- \
-"cd $HOME/Downloads/ && \
-tar -xzvf caps2esc-latest.tar.gz && \
-cd caps2esc-1.0.4 && \
-gcc caps2esc.c -o caps2esc -I/usr/include/libevdev-1.0 -levdev -ludev && \
-./caps2esc" \
 
-# TODO test script in a vm
-# TODO find libev-dev or whatever it is is the depedency needed for compiling caps2esc
+# compile in different terminal
+gnome-terminal -- sh -c "cd $HOME/Downloads/ && tar -xzvf caps2esc-latest.tar.gz && cd caps2esc-1.0.4 && gcc caps2esc.c -o caps2esc -I/usr/include/libevdev-1.0 -levdev -ludev && sh"
 
 #install ohmyz.sh
 gnome-terminal -- sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -41,10 +35,11 @@ gnome-terminal -- ~/.fzf/install --no-bash --no-zsh
 
 # clone dotfiles
 git clone --separate-git-dir=$HOME/.myconf https://github.com/balamurali27/dotfiles $HOME/myconf-tmp
-cp $HOME/myconf-tmp/.config/nvim/init.vim $HOME/.config/nvim/init.vim
-echo "alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'" >> ~/.zshrc
+# neovim config
+cp -r $HOME/myconf-tmp/.config/nvim $HOME/.config
+cp $HOME/myconf-tmp/.zshrc $HOME
 
-#config neovim
+#configure neovim
 sed -i '0,5{s/^"//}' $HOME/.config/nvim/init.vim
 #fzf plug point
 sed -i 's/\/usr\/bin\//~\/./' $HOME/.config/nvim/init.vim
