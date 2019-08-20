@@ -22,6 +22,7 @@ wget -O $HOME/Downloads/caps2esc-latest.tar.gz https://github.com/oblitum/caps2e
 gnome-terminal -- \
 "cd $HOME/Downloads/ && \
 tar -xzvf caps2esc-latest.tar.gz && \
+cd caps2esc-1.0.4 && \
 gcc caps2esc.c -o caps2esc -I/usr/include/libevdev-1.0 -levdev -ludev && \
 ./caps2esc" \
 
