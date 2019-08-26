@@ -3,14 +3,12 @@
 				" \  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	" autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 " endif
-set number relativenumber mouse=a "tabstop=8 shiftwidth=8
+set number relativenumber mouse=a
 set foldlevelstart=99 foldmethod=syntax
 " reduce delay when going to normal mode from insert mode
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
-" make html less lengthy
-" autocmd	BufReadPre *.html set tabstop=4 shiftwidth=4
 " enable copy paste across terminals with y and p
 set clipboard=unnamedplus
 " enable spell check in comments and documents
@@ -30,10 +28,11 @@ Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
 Plug 'townk/vim-autoclose'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 call plug#end()
 
@@ -68,7 +67,7 @@ let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
 let g:snips_author                       = "Balamurali M"
 " make ultisnips look for private snippets in .UltiSnips directory in current workspace
 let g:UltiSnipsSnippetsDir               = ".UltiSnips"
-let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal.snippets", "UltiSnips"]
+let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal", "UltiSnips"]
 
 """""""""""""""""""
 "  NERDcommenter  "
