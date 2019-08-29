@@ -7,7 +7,7 @@ echo $pass | sudo -S echo Got sudo
 echo Add neovim and safeeyes repo...
 echo
 sudo add-apt-repository -y ppa:neovim-ppa/stable
-sudo add-apt-repository ppa:slgobinath/safeeyes
+sudo add-apt-repository -y ppa:slgobinath/safeeyes
 echo Updating apt...
 echo
 echo $pass | sudo -S apt update -y
