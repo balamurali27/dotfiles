@@ -25,7 +25,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
-Plug 'townk/vim-autoclose'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -71,7 +70,6 @@ let g:NERDTrimTrailingWhitespace         = 1
 """""""""""
 "  Netrw  "
 """""""""""
-Directory listing with Netrw
 let g:netrw_banner                       = 0
 let g:netrw_liststyle                    = 3
 let g:netrw_browse_split                 = 4
