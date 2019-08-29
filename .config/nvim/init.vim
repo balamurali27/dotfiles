@@ -1,8 +1,3 @@
-" if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-	" silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-				" \  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	" autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
 set number relativenumber mouse=a
 set foldlevelstart=99 foldmethod=syntax
 " reduce delay when going to normal mode from insert mode
@@ -15,7 +10,7 @@ set clipboard=unnamedplus
 set spell spelllang=en_gb
 
 call plug#begin()
-" Color
+" Colour
 Plug 'arcticicestudio/nord-vim'
 
 " HTML
@@ -58,8 +53,6 @@ colorscheme nord
 """""""""""""""
 "  ultisnips  "
 """""""""""""""
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger             = "<tab>"
 let g:UltiSnipsJumpForwardTrigger        = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
@@ -72,11 +65,13 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 """""""""""""""""""
 "  NERDcommenter  "
 """""""""""""""""""
-
 let g:NERDSpaceDelims                    = 1
 let g:NERDTrimTrailingWhitespace         = 1
 
-" Directory listing with Netrw
+"""""""""""
+"  Netrw  "
+"""""""""""
+Directory listing with Netrw
 let g:netrw_banner                       = 0
 let g:netrw_liststyle                    = 3
 let g:netrw_browse_split                 = 4
@@ -98,4 +93,15 @@ nnoremap <space><space> :Buffers<cr>
 nnoremap <space>r :Rg
 " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nnoremap <space>c :Commands<cr>
+
+"""""""""""""""""""""""""
+"  built in completion  "
+"""""""""""""""""""""""""
+inoremap <silent> ,f <C-x><C-f>
+inoremap <silent> ,i <C-x><C-i>
+inoremap <silent> ,l <C-x><C-l>
+inoremap <silent> ,n <C-x><C-n>
+inoremap <silent> ,o <C-x><C-o>
+inoremap <silent> ,t <C-x><C-]>
+inoremap <silent> ,u <C-x><C-u>
 

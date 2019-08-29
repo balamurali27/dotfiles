@@ -1,13 +1,13 @@
 #!/bin/sh
-# XXX Installs my setup on a typical ubuntu system 16.04 or higher
+# XXX Installs my setup on a typical ubuntu system (16.04 or higher)
 
 echo Enter sudo passwd : 
 read pass
 echo $pass | sudo -S echo Got sudo
-#sleep cuz dpkg lock
-echo Adding neovim repo...
+echo Add neovim and safeeyes repo...
 echo
 sudo add-apt-repository -y ppa:neovim-ppa/stable
+sudo add-apt-repository ppa:slgobinath/safeeyes
 echo Updating apt...
 echo
 echo $pass | sudo -S apt update -y
@@ -15,7 +15,9 @@ echo Installing packages...
 echo
 echo $pass | sudo -S apt install -y wget git curl tmux neovim util-linux \
 dconf-tools dconf-gsettings-backend dconf-cli dconf-service uuid-runtime \
-python-dev python-pip python3-dev python3-pip libudev-dev
+python-dev python-pip python3-dev python3-pip ctags zsh safeeyes \
+libudev-dev libevdev-dev libevdev-tools libevdev2
+
 if [ $? -ne 0 ]; then
   echo Apt failed 
   echo Exiting...
@@ -37,15 +39,18 @@ gnome-terminal -- ~/.fzf/install --no-bash --no-zsh
 
 # clone dotfiles
 git clone --separate-git-dir=$HOME/.myconf https://github.com/balamurali27/dotfiles $HOME/myconf-tmp
-# neovim config
-cp -r $HOME/myconf-tmp/.config/nvim $HOME/.config
 # tmux config
 cp $HOME/myconf-tmp/.tmux.conf $HOME
 
-#configure neovim
-sed -i '0,5{s/^"//}' $HOME/.config/nvim/init.vim
-#fzf plug point
+# neovim config
+cp -r $HOME/myconf-tmp/.config/nvim $HOME/.config
+#install vim-plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#fzf plug point for vim
 sed -i 's/\/usr\/bin\//~\/./' $HOME/.config/nvim/init.vim
+#To use Ultisnips
+pip3 install --user --upgrade pynvim
 gnome-terminal -- nvim
 
 #install gnome terminal nord theme
@@ -55,3 +60,8 @@ gnome-terminal -- ./nord-gnome-terminal/src/nord.sh
 #install ohmyz.sh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 echo "alias v=nvim" >> .zshrc
+
+#git config
+git config --global user.email "balamurali05@outlook.com"
+git config --global user.name "Balamurali M"
+
