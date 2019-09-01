@@ -1,0 +1,3 @@
+snippet printf "printf call with space"
+printf ("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet

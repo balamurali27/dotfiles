@@ -4,8 +4,6 @@ set foldlevelstart=99 foldmethod=syntax
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
-" enable copy paste across terminals with y and p
-set clipboard=unnamedplus
 " enable spell check in comments and documents
 set spell spelllang=en_gb
 
@@ -17,7 +15,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'mattn/emmet-vim'
 
 " Editing
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'

@@ -1,1 +1,1 @@
-set makeprg=gcc\ %
+set makeprg=gcc\ \-Wall\ -Wextra\ %
