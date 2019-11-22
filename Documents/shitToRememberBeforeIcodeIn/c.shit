@@ -1,0 +1,8 @@
+c uses call by value (Unlike python!)
+	so use one time variables carefully
+Use -g compile flag to use gdb
+To get input from file rather than STDIN when using gdb
+	`gdb a.out`
+	`start < input.in`
+step multiple times in gdb using
+	`step 25` (to step 25 times)

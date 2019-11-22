@@ -5,7 +5,7 @@ function run {
     $@&
   fi
 }
-run urxvtd -q -o
+# run urxvtd -q -o
 run feh --recursive --randomize --bg-fill /home/balu/.config/variety/Downloaded
 run kdeconnect-indicator
 run variety
@@ -13,5 +13,5 @@ run safeeyes
 run fluxgui
 run ssh-agent -s -D
 run udiskie --tray
-run compton -CG
+# run compton -CG
 run nm-applet

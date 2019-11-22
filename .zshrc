@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/balu/.oh-my-zsh"
+export ZSH="/home/balu/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -100,5 +100,10 @@ source /etc/profile.d/vte.sh
 export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/ruby/2.6.0/bin:$PATH"
 alias v="nvim"
-alias o="xdg-open \`fzf\`"
+alias o="mimeopen \`fzf\`"
 alias vconfig="v ~/.config/nvim/init.vim"
+alias vfzf="v \`fzf\`"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+alias pomodoro="sleep 25m && notify-send 'take rest man'"
+alias todo="nvim ~/Documents/todo"
+

@@ -52,7 +52,7 @@ end
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init("/home/balu/.config/awesome/xresources/theme.lua")
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "termite"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 ----------------------
@@ -123,20 +123,31 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-	{ "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-	{ "Manual", terminal .. " -e man awesome" },
+	{ "Hotkeys",     function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+	{ "Manual",      terminal .. " -e man awesome" },
 	{ "Edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "Restart", awesome.restart },
-	{ "Quit", function() awesome.quit() end },
+	{ "Restart",     awesome.restart },
+	{ "Quit",        function() awesome.quit() end },
+}
+
+-- Create power menu
+powermenu = {
+	{ "Suspend",                "systemctl suspend" },
+	{ "Suspend Then Hibernate", "systemctl suspend-then-hibernate" },
+	{ "Hibernate",              "systemctl hibernate" },
+	{ "Shutdown",               "shutdown now" },
+	{ "Restart",                "reboot"}
+
 }
 
 mymainmenu = awful.menu({ items = {
-	{ "Awesome", myawesomemenu, beautiful.awesome_icon },
-	{ "Apps", xdgmenu },
-	{ "Firefox", "firefox", beautiful.firefox_icon },
-	{ "Files", "pcmanfm-qt", beautiful.pcmanfm_icon },
-	{ "Okular", "okular", beautiful.okular_icon },
-	{ "Terminal", terminal, beautiful.terminal_icon }
+	{ "Awesome",  myawesomemenu, beautiful.awesome_icon },
+	{ "Apps",     xdgmenu },
+	{ "Power",    powermenu },
+	{ "Firefox",  "firefox",     beautiful.firefox_icon },
+	{ "Files",    "pcmanfm-qt",  beautiful.pcmanfm_icon },
+	{ "Okular",   "okular",      beautiful.okular_icon },
+	{ "Terminal", terminal,      beautiful.terminal_icon }
 }
 })
 
@@ -311,14 +322,23 @@ globalkeys = gears.table.join(
 	awful.key({}, "XF86MonBrightnessUp", function()
 		awful.spawn("light -A 5", false)
 	end),
+	awful.key({modkey}, "XF86MonBrightnessUp", function()
+		awful.spawn("light -S 10", false)
+	end),
 	awful.key({}, "XF86MonBrightnessDown", function()
 		awful.spawn("light -U 5", false)
 	end),
-	awful.key({modkey, "Shift"}, "x",	function()
+	awful.key({modkey}, "XF86MonBrightnessDown", function()
+		awful.spawn("light -S 0", false)
+	end),
+	awful.key({modkey, "Shift"}, "x", function()
 		awful.spawn.with_shell("~/.config/awesome/i3lockcommand.sh")
 	end),
 	awful.key({}, "Print", function()
 		awful.spawn("scrot -e 'mv $f ~/Pictures/'", false)
+	end),
+	awful.key({modkey, "Control"}, "s", function()
+		awful.spawn("systemctl suspend")
 	end),
 	awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
 		{description="show help", group="awesome"}),

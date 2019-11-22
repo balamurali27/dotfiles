@@ -1,11 +1,11 @@
 set number relativenumber mouse=a
+" copy from one vim instance to another
+set clipboard=unnamedplus
 set foldlevelstart=99 foldmethod=syntax
 " reduce delay when going to normal mode from insert mode
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
-" enable spell check in comments and documents
-set spell spelllang=en_gb
 
 call plug#begin()
 " Colour
@@ -14,18 +14,28 @@ Plug 'arcticicestudio/nord-vim'
 " HTML
 Plug 'mattn/emmet-vim'
 
-" Editing
+" Coding
 Plug 'tpope/vim-commentary'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-rsi'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'junegunn/vim-easy-align'
+Plug 'Chiel92/vim-autoformat'
+
+" Fuzzy find
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
+
+" Writing
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 """""""""""""""
@@ -90,9 +100,7 @@ nnoremap <space>r :Rg
 " fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
 nnoremap <space>c :Commands<cr>
 
-"""""""""""""""""""""""""
-"  built in completion  "
-"""""""""""""""""""""""""
+" built in completion
 inoremap <silent> ,f <C-x><C-f>
 inoremap <silent> ,i <C-x><C-i>
 inoremap <silent> ,l <C-x><C-l>
@@ -101,3 +109,15 @@ inoremap <silent> ,o <C-x><C-o>
 inoremap <silent> ,t <C-x><C-]>
 inoremap <silent> ,u <C-x><C-u>
 
+" juggling with quickfix entries
+nnoremap <End>  :cnext<CR>
+nnoremap <Home> :cprevious<CR>
+
+" zeal mapping
+:nnoremap gz :!zeal "<cword>"&<CR><CR>
+
+" Goyo and Limelight
+autocmd! User GoyoEnter Limelight|set spell spelllang=en_gb spellsuggest
+autocmd! User GoyoLeave Limelight!
+
+let g:limelight_conceal_ctermfg = 8
