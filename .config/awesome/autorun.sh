@@ -10,8 +10,9 @@ run feh --recursive --randomize --bg-fill /home/balu/.config/variety/Downloaded
 run kdeconnect-indicator
 run variety
 run safeeyes
-run fluxgui
+run redshift-gtk
 run ssh-agent -s -D
 run udiskie --tray
-# run compton -CG
+run compton -CG
 run nm-applet
+run tomighty

@@ -103,7 +103,13 @@ alias v="nvim"
 alias o="mimeopen \`fzf\`"
 alias vconfig="v ~/.config/nvim/init.vim"
 alias vfzf="v \`fzf\`"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-alias pomodoro="sleep 25m && notify-send 'take rest man'"
+alias pomodoro="sleep 25m && notify-send 'take rest man' && mimeopen Music/E*.mp3"
+alias rest5="sleep 5m && notify-send 'take rest man' && mimeopen Music/E*.mp3"
+alias rest25="sleep 25m && notify-send 'take rest man' && mimeopen Music/E*.mp3"
 alias todo="nvim ~/Documents/todo"
+alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
+alias ga="git add ."
+alias gc="git commit"
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh

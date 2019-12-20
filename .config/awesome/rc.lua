@@ -337,6 +337,9 @@ globalkeys = gears.table.join(
 	awful.key({}, "Print", function()
 		awful.spawn("scrot -e 'mv $f ~/Pictures/'", false)
 	end),
+	awful.key({modekey, "Control"}, "Print", function()
+		awful.spawn("lximage-qt -s", false)
+	end),
 	awful.key({modkey, "Control"}, "s", function()
 		awful.spawn("systemctl suspend")
 	end),
