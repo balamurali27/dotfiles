@@ -157,9 +157,24 @@ inoremap <silent> ,o <C-x><C-o>
 inoremap <silent> ,t <C-x><C-]>
 inoremap <silent> ,u <C-x><C-u>
 
+"""""""""""""""""""""
+"  build integration  "
+"""""""""""""""""""""
+"build
+nnoremap <leader>b :Make<CR>
+nnoremap <leader>B :Make!<CR>
+"quickfix window close
+nnoremap <leader>q :cclose<CR>
+
 " juggling with quickfix entries
 nnoremap <End>  :cnext<CR>
 nnoremap <Home> :cprevious<CR>
+
+" close quickfix window if its the last one
+augroup QFClose
+  autocmd!
+  autocmd WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
+augroup END
 
 " zeal mapping
 :nnoremap gz :!zeal "<cword>"&<CR><CR>
@@ -168,12 +183,6 @@ nnoremap <Home> :cprevious<CR>
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:limelight_conceal_ctermfg = 8
-
-" close quickfix window if its the last one
-augroup QFClose
-  autocmd!
-  autocmd WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
-augroup END
 
 " automatic spell check for certain filetypes
 augroup setSpelling
