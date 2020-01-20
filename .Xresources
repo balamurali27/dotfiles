@@ -1,5 +1,5 @@
-! #include "/home/balu/.Xresources.d/custom-themes/narutov2.Xresources"
-! #include "/home/balu/.Xresources.d/Xresources-themes-master/xcolors-zenburn.Xresources"
+#include "/home/balu/.Xresources.d/custom-themes/seoul256.Xresources"
+/* #include "/home/balu/.Xresources.d/Xresources-themes-master/iterm-Molokai.Xresources" */
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! open new terminal in current directory
@@ -10,27 +10,27 @@ URxvt.keysym.Shift-Mod4-Return: urxvtc\n
 URxvt.secondaryScroll: true
 URxvt.secondaryWheel: true
 
-!*.font: xft:Iosevka Term:style=Regular:size=12:antialias=true,hinting=true
-!*.boldFont: xft:Iosevka Term:style=Bold:size=12
-!*.italicFont: xft:Iosevka Term:style=Italic:size=12
-!*.boldItalicFont: xft:Iosevka Term:style=Bold Italic:size=12
+*.font: xft:Iosevka Term:style=Regular:size=12:antialias=true,hinting=true
+*.boldFont: xft:Iosevka Term:style=Bold:size=12
+*.italicFont: xft:Iosevka Term:style=Italic:size=12
+*.boldItalicFont: xft:Iosevka Term:style=Bold Italic:size=12
 
-*.font: xft:Anka/Coder:style=Regular:size=13:antialias=true,hinting=true
+!*.font: xft:Anka/Coder:style=Regular:size=13:antialias=true,hinting=true
 
 ! default window size
-URxvt.geometry: 60x20
+!URxvt.geometry: 60x20
 URxvt*perl-ext-common: eval,selection,resize-font,matcher
-URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.url-launcher: /usr/bin/vendor_perl/mimeopen
 URxvt.matcher.button: 1
 URxvt*scrollBar: false
 URxvt*highlightSelection: true
 ! for true transparency
- URxvt*depth: 32
-URxvt*background: rgba:0000/0000/0200/c800
+! URxvt*depth: 32
+! URxvt*background: rgba:0000/0000/0200/c800 
 ! URxvt*shading: 99 to 0 darkens, 101 to 200 lightens
-URxvt*shading: 10
+!URxvt*shading: 70
 !*transparent: true
-! URxvt*blurRadius: 5
+! URxvt*blurRadius: 35
 URxvt.keysym.Home: \033[7~
 URxvt.keysym.End: \033[8~
 URxvt.keysym.KP_Home: \033[7~
@@ -44,23 +44,8 @@ URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
-! =================
-*background:	#1D1F28
-*foreground:	#FDFDFD
-*cursorColor:	#C574DD
-*color0:	#282A36
-*color1:	#F37F97
-*color2:	#5ADECD
-*color3:	#F2A272
-*color4:	#8897F4
-*color5:	#C574DD
-*color6:	#79E6F3
-*color7:	#FDFDFD
-*color8:	#414458
-*color9:	#FF4971
-*color10:	#18E3C8
-*color11:	#FF8037
-*color12:	#556FFF
-*color13:	#B043D1
-*color14:	#3FDCEE
-*color15:	#BEBEC1
+! send same escape sequences as xterm
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C

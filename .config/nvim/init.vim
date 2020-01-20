@@ -9,8 +9,8 @@ set hidden
 
 call plug#begin()
 " Colour
-Plug 'arcticicestudio/nord-vim'
-
+" Plug 'arcticicestudio/nord-vim'
+Plug 'junegunn/seoul256.vim'
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -25,6 +25,14 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/vim-easy-align'
 Plug 'Chiel92/vim-autoformat'
 Plug 'psliwka/vim-smoothie'
+"disable search highlight after done
+Plug 'romainl/vim-cool'
+
+" remove next two probably
+" Plug 'coddingtonbear/neomake-platformio'
+" Plug 'embear/vim-localvimrc'
+
+" Plug 'dense-analysis/ale'
 
 " Fuzzy find
 Plug '/usr/bin/fzf'
@@ -55,23 +63,30 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"""""""""""
+""""""""""""
 ""  nord  "
-"""""""""""
-let g:nord_italic                        = 1
-let g:nord_underline                     = 1
-let g:nord_italic_comments               = 1
-let g:nord_cursor_line_number_background = 1
-set cursorline
-colorscheme nord
+""""""""""""
+"let g:nord_italic                        = 1
+"let g:nord_underline                     = 1
+"let g:nord_italic_comments               = 1
+"let g:nord_cursor_line_number_background = 1
+"set cursorline
+"colorscheme nord
+""""""""""""""
+"  seoul256  "
+""""""""""""""
+"   Range:   233 (darkest) ~ 239 (lightest)
+"   Default: 237
+let g:seoul256_background = 233
+colorscheme seoul256
 
-""""""""""""""""""""
-""  Custom Colors  "
-""""""""""""""""""""
-"" dark colors for line number and comments
-"highlight LineNr ctermfg=DarkGray
-"highlight comment ctermfg=DarkGray
-"highlight CursorLineNr ctermfg=LightGray
+"""""""""""""""""""
+"  Custom Colors  "
+"""""""""""""""""""
+" dark colors for line number and comments
+highlight LineNr ctermfg=DarkGray
+highlight comment ctermfg=DarkGray
+highlight CursorLineNr ctermfg=LightGray
 
 """""""""""""""
 "  ultisnips  "
@@ -125,14 +140,15 @@ set wildignore+=tags
 set wildignore+=*.tar.*
 set wildignore+=**/node_modules/**
 set wildignore+=**/build/**
+set wildignore+=**/arduino-esp32/**
 set wildignorecase
 
 set wildcharm=<C-z>
 
 " juggling with files
 set path=.,**
-" set ignorecase
-" set smartcase
+set ignorecase
+set smartcase
 nnoremap <space>f :find <C-z><S-Tab>
 " nnoremap <space>f :find <C-R>=expand('%:h').'/'<CR>
 " nnoremap <space>f :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
@@ -140,6 +156,8 @@ nnoremap <space>f :find <C-z><S-Tab>
 " juggling with buffers
 nnoremap <space><space> :bprevious!<CR> :buffer <C-z><S-Tab>
 nnoremap <space>r :grep <CR>
+nnoremap <space>v :vimgrep /
+nnoremap <space>c :vimgrep <cword> ** <CR>
 nnoremap <space>j :tjump /
 
 " change grep default, (no idea how to use)

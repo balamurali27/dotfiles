@@ -6,3 +6,5 @@ To get input from file rather than STDIN when using gdb
 	`start < input.in`
 step multiple times in gdb using
 	`step 25` (to step 25 times)
+sizeof(ptr) will always return 8 or some other value depending on memory of pointers
+	therefore sizeof(pointer to string) won't be same strlen
