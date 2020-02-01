@@ -99,17 +99,17 @@ source /etc/profile.d/vte.sh
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/ruby/2.6.0/bin:$PATH"
-alias v="nvim"
-alias o="mimeopen \`fzf\`"
-alias vconfig="v ~/.config/nvim/init.vim"
-alias vfzf="v \`fzf\`"
-alias pomodoro="sleep 25m && notify-send 'take rest man' && mimeopen Music/E*.mp3"
-alias rest5="sleep 5m && notify-send 'take rest man' && mimeopen Music/E*.mp3"
-alias rest25="sleep 25m && notify-send 'take rest man' && mimeopen Music/E*.mp3"
+#esp32 emulator
+export PATH="$HOME/Documents/code/esp-related/qemu/build/xtensa-softmmu:$PATH"
+
+alias v=nvim
+# use triple commas so as to keep double quotes inside
+alias o='''mimeopen "`fzf`"'''
+alias vconfig="nvim ~/.config/nvim/init.vim"
+# alias vfzf="v \`fzf\`"
 alias todo="nvim ~/Documents/todo"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
-alias ga="git add ."
-alias gc="git commit"
+alias genrunner="ruby /home/balu/esp/Unity/auto/generate_test_runner.rb"
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
