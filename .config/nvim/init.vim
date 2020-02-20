@@ -6,11 +6,12 @@ set foldlevelstart=99 foldmethod=syntax
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
+colorscheme slate
 
 call plug#begin()
 " Colour
 " Plug 'arcticicestudio/nord-vim'
-Plug 'junegunn/seoul256.vim'
+" Plug 'junegunn/seoul256.vim'
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -25,6 +26,10 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/vim-easy-align'
 Plug 'Chiel92/vim-autoformat'
 Plug 'psliwka/vim-smoothie'
+"""""""""
+"  LSP  "
+"""""""""
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "disable search highlight after done
 Plug 'romainl/vim-cool'
 
@@ -35,8 +40,8 @@ Plug 'romainl/vim-cool'
 " Plug 'dense-analysis/ale'
 
 " Fuzzy find
-Plug '/usr/bin/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug '/usr/bin/fzf'
+" Plug 'junegunn/fzf.vim'
 
 " Writing
 Plug 'junegunn/goyo.vim'
@@ -50,6 +55,7 @@ call plug#end()
 """""""""""""""
 "  gutentags  "
 """""""""""""""
+let g:gutentags_ctags_tagfile = '.git/tags'
 "ctags obey gitignore and faster
 if executable('rg')
 	let g:gutentags_file_list_command = 'rg --files'
@@ -72,13 +78,6 @@ nmap ga <Plug>(EasyAlign)
 "let g:nord_cursor_line_number_background = 1
 "set cursorline
 "colorscheme nord
-""""""""""""""
-"  seoul256  "
-""""""""""""""
-"   Range:   233 (darkest) ~ 239 (lightest)
-"   Default: 237
-let g:seoul256_background = 233
-colorscheme seoul256
 
 """""""""""""""""""
 "  Custom Colors  "
@@ -141,6 +140,7 @@ set wildignore+=*.tar.*
 set wildignore+=**/node_modules/**
 set wildignore+=**/build/**
 set wildignore+=**/arduino-esp32/**
+set wildignore+=**/arduino/**
 set wildignorecase
 
 set wildcharm=<C-z>
@@ -162,7 +162,7 @@ nnoremap <space>j :tjump /
 
 " change grep default, (no idea how to use)
 if executable("rg")
-	set grepprg=rg\ -uuu
+	set grepprg=rg\ --vimgrep
 	set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
@@ -179,6 +179,8 @@ inoremap <silent> ,u <C-x><C-u>
 "  build integration  "
 """""""""""""""""""""
 "build
+" TODO: check if build integration exists in coc <28-01-20, Balamurali M> "
+noremap <C-cr> :Make<CR> 
 nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :Make!<CR>
 "quickfix window close
@@ -195,7 +197,9 @@ augroup QFClose
 augroup END
 
 " zeal mapping
-:nnoremap gz :!zeal "<cword>"&<CR><CR>
+if executable('zeal')
+	nnoremap gz :!zeal "<cword>"&<CR><CR>
+endif
 
 " Goyo and Limelight
 autocmd! User GoyoEnter Limelight
@@ -221,3 +225,25 @@ function! StripTrailingWhitespace()
   endif
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""                              coc.nvim things                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" " Some servers have issues with backup files, see #649
+" set nobackup
+" set nowritebackup
+
+" "" Better display for messages
+" set cmdheight=2
+
+" " You will have bad experience for diagnostic messages when it's default 4000.
+" set updatetime=300
+
+" " don't give |ins-completion-menu| messages.
+" set shortmess+=c
+
+" " always show signcolumns
+" set signcolumn=yes
+
+" " Use <c-space> to trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()

@@ -62,7 +62,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python)
+plugins=(git python github)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,10 +106,14 @@ alias v=nvim
 # use triple commas so as to keep double quotes inside
 alias o='''mimeopen "`fzf`"'''
 alias vconfig="nvim ~/.config/nvim/init.vim"
-# alias vfzf="v \`fzf\`"
+alias vf="v \`fzf\`"
 alias todo="nvim ~/Documents/todo"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
 alias genrunner="ruby /home/balu/esp/Unity/auto/generate_test_runner.rb"
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+#hub command autocomplete
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
