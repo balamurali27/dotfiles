@@ -30,6 +30,7 @@ Plug 'psliwka/vim-smoothie'
 "  LSP  "
 """""""""
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 "disable search highlight after done
 Plug 'romainl/vim-cool'
 
@@ -56,9 +57,18 @@ call plug#end()
 "  gutentags  "
 """""""""""""""
 let g:gutentags_ctags_tagfile = '.git/tags'
-"ctags obey gitignore and faster
+
+""""""""""""""""""""""
+"  ripgrep optimize  "
+""""""""""""""""""""""
 if executable('rg')
+	"ctags obey gitignore and faster
 	let g:gutentags_file_list_command = 'rg --files'
+
+	" TODO: check if this works <23-02-20, Balamurali M> "
+	" change grep default, (no idea how to use)
+	set grepprg=rg\ --vimgrep
+	" set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 """""""""""""""
@@ -68,16 +78,6 @@ endif
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-""""""""""""
-""  nord  "
-""""""""""""
-"let g:nord_italic                        = 1
-"let g:nord_underline                     = 1
-"let g:nord_italic_comments               = 1
-"let g:nord_cursor_line_number_background = 1
-"set cursorline
-"colorscheme nord
 
 """""""""""""""""""
 "  Custom Colors  "
@@ -98,82 +98,6 @@ let g:snips_author                       = "Balamurali M"
 " make ultisnips look for private snippets in .UltiSnips directory in current workspace
 let g:UltiSnipsSnippetsDir               = ".UltiSnips"
 let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal", "UltiSnips"]
-
-"""""""""""
-"  Netrw  "
-"""""""""""
-let g:netrw_banner                       = 0
-let g:netrw_liststyle                    = 3
-let g:netrw_browse_split                 = 4
-let g:netrw_altv                         = 1
-let g:netrw_winsize                      = 25
-
-""""""""""
-""  fzf  "
-""""""""""
-"nnoremap <space> <Nop>
-"" fuzzy find files in the working directory
-"nnoremap <space>f :Files<cr>
-"" fuzzy find lines in the current file
-"nnoremap <space>/ :BLines<cr>
-"" fuzzy find an open buffer
-"nnoremap <space><space> :Buffers<cr>
-"" fuzzy find text in the working directory
-"nnoremap <space>r :Rg
-"" fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
-"nnoremap <space>c :Commands<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            Vanilla file switch                             "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use space as leader
-nnoremap <space> <Nop>
-
-" wildmenu tweaks
-set wildignore=*.swp,*.bak
-set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
-set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
-set wildignore+=*.pdf,*.psd
-set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
-set wildignore+=tags
-set wildignore+=*.tar.*
-set wildignore+=**/node_modules/**
-set wildignore+=**/build/**
-set wildignore+=**/arduino-esp32/**
-set wildignore+=**/arduino/**
-set wildignorecase
-
-set wildcharm=<C-z>
-
-" juggling with files
-set path=.,**
-set ignorecase
-set smartcase
-nnoremap <space>f :find <C-z><S-Tab>
-" nnoremap <space>f :find <C-R>=expand('%:h').'/'<CR>
-" nnoremap <space>f :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
-
-" juggling with buffers
-nnoremap <space><space> :bprevious!<CR> :buffer <C-z><S-Tab>
-nnoremap <space>r :grep <CR>
-nnoremap <space>v :vimgrep /
-nnoremap <space>c :vimgrep <cword> ** <CR>
-nnoremap <space>j :tjump /
-
-" change grep default, (no idea how to use)
-if executable("rg")
-	set grepprg=rg\ --vimgrep
-	set grepformat=%f:%l:%c:%m,%f:%l:%m
-endif
-
-" built in completion
-inoremap <silent> ,f <C-x><C-f>
-inoremap <silent> ,i <C-x><C-i>
-inoremap <silent> ,l <C-x><C-l>
-inoremap <silent> ,n <C-x><C-n>
-inoremap <silent> ,o <C-x><C-o>
-inoremap <silent> ,t <C-x><C-]>
-inoremap <silent> ,u <C-x><C-u>
 
 """""""""""""""""""""
 "  build integration  "
@@ -213,37 +137,16 @@ augroup setSpelling
   autocmd FileType markdown  setlocal spell spelllang=en_us
 augroup END
 
-" pasted as copied, I have no idea how this works. Could be useful in the
-" future
-function! StripTrailingWhitespace()
-  if !&binary && &filetype != 'diff'
-    normal mz
-    normal Hmy
-    %s/\s\+$//e
-    normal 'yz<CR>
-    normal `z
-  endif
-endfunction
+" auto formatting
+nnoremap <leader>f :Autoformat<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""                              coc.nvim things                               "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""
+""  nord  "
+""""""""""""
+"let g:nord_italic                        = 1
+"let g:nord_underline                     = 1
+"let g:nord_italic_comments               = 1
+"let g:nord_cursor_line_number_background = 1
+"set cursorline
+"colorscheme nord
 
-" " Some servers have issues with backup files, see #649
-" set nobackup
-" set nowritebackup
-
-" "" Better display for messages
-" set cmdheight=2
-
-" " You will have bad experience for diagnostic messages when it's default 4000.
-" set updatetime=300
-
-" " don't give |ins-completion-menu| messages.
-" set shortmess+=c
-
-" " always show signcolumns
-" set signcolumn=yes
-
-" " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
