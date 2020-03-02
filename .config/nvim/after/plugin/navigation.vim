@@ -18,7 +18,7 @@ set wildignorecase
 set wildcharm=<C-z>
 
 " juggling with files
-set path=.,**
+set path+=.,**
 set ignorecase
 set smartcase
 nnoremap <space>f :find <C-z><S-Tab>

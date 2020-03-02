@@ -6,11 +6,10 @@ set foldlevelstart=99 foldmethod=syntax
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
-colorscheme slate
 
 call plug#begin()
 " Colour
-" Plug 'arcticicestudio/nord-vim'
+Plug 'arcticicestudio/nord-vim'
 " Plug 'junegunn/seoul256.vim'
 " HTML
 Plug 'mattn/emmet-vim'
@@ -29,20 +28,14 @@ Plug 'psliwka/vim-smoothie'
 """""""""
 "  LSP  "
 """""""""
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "disable search highlight after done
 Plug 'romainl/vim-cool'
 
-" remove next two probably
-" Plug 'coddingtonbear/neomake-platformio'
-" Plug 'embear/vim-localvimrc'
-
-" Plug 'dense-analysis/ale'
-
 " Fuzzy find
-" Plug '/usr/bin/fzf'
-" Plug 'junegunn/fzf.vim'
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Writing
 Plug 'junegunn/goyo.vim'
@@ -79,13 +72,13 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"""""""""""""""""""
-"  Custom Colors  "
-"""""""""""""""""""
-" dark colors for line number and comments
-highlight LineNr ctermfg=DarkGray
-highlight comment ctermfg=DarkGray
-highlight CursorLineNr ctermfg=LightGray
+""""""""""""""""""""
+""  Custom Colors  "
+""""""""""""""""""""
+"" dark colors for line number and comments
+"highlight LineNr ctermfg=DarkGray
+"highlight comment ctermfg=DarkGray
+"highlight CursorLineNr ctermfg=LightGray
 
 """""""""""""""
 "  ultisnips  "
@@ -137,16 +130,12 @@ augroup setSpelling
   autocmd FileType markdown  setlocal spell spelllang=en_us
 augroup END
 
-" auto formatting
-nnoremap <leader>f :Autoformat<CR>
-
 """"""""""""
 ""  nord  "
 """"""""""""
-"let g:nord_italic                        = 1
-"let g:nord_underline                     = 1
-"let g:nord_italic_comments               = 1
-"let g:nord_cursor_line_number_background = 1
-"set cursorline
-"colorscheme nord
-
+let g:nord_italic                        = 1
+let g:nord_underline                     = 1
+let g:nord_italic_comments               = 1
+let g:nord_cursor_line_number_background = 1
+set cursorline
+colorscheme nord
