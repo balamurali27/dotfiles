@@ -18,7 +18,7 @@ set wildignorecase
 set wildcharm=<C-z>
 
 " juggling with files
-set path+=.,**
+set path=.,**,include
 set ignorecase
 set smartcase
 nnoremap <space>f :find <C-z><S-Tab>
@@ -26,7 +26,7 @@ nnoremap <space>f :find <C-z><S-Tab>
 " nnoremap <space>f :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
 
 " juggling with buffers
-nnoremap <space><space> :bprevious!<CR> :buffer <C-z><S-Tab>
+nnoremap <space><space> <c-^>:buffer <C-z><S-Tab>
 nnoremap <space>r :grep <CR>
 nnoremap <space>v :vimgrep /
 nnoremap <space>c :vimgrep <cword> ** <CR>

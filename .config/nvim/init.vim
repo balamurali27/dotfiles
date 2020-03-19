@@ -1,16 +1,18 @@
-set number relativenumber mouse=a
+set number relativenumber
 " copy from one vim instance to another
-set clipboard=unnamedplus
+" set clipboard=unnamedplus ; try using "+ for copy to system clipboard
 set foldlevelstart=99 foldmethod=syntax
 " reduce delay when going to normal mode from insert mode
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
 set hidden
+" logical yank mapping
+:map Y y$
 
 call plug#begin()
 " Colour
-Plug 'arcticicestudio/nord-vim'
-" Plug 'junegunn/seoul256.vim'
+" Plug 'arcticicestudio/nord-vim'
+Plug 'nanotech/jellybeans.vim'
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -22,10 +24,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rsi'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'junegunn/vim-easy-align'
-Plug 'Chiel92/vim-autoformat'
 Plug 'psliwka/vim-smoothie'
-"""""""""
+
+""""""""
 "  LSP  "
 """""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -46,6 +47,31 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 call plug#end()
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 appearance                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""
+"""  nord  "
+"""""""""""""
+"let g:nord_italic                        = 1
+"let g:nord_underline                     = 1
+"let g:nord_italic_comments               = 1
+"let g:nord_cursor_line_number_background = 1
+"set cursorline
+
+""""""""""""""""
+"  jellybeans  "
+""""""""""""""""
+let g:jellybeans_overrides = {
+\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+\}
+if has('termguicolors') && &termguicolors
+    let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+let g:jellybeans_use_term_italics = 1
+colorscheme jellybeans
+
 """""""""""""""
 "  gutentags  "
 """""""""""""""
@@ -64,24 +90,16 @@ if executable('rg')
 	" set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-"""""""""""""""
-"  EasyAlign  "
-"""""""""""""""
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-""""""""""""""""""""
-""  Custom Colors  "
-""""""""""""""""""""
-"" dark colors for line number and comments
-"highlight LineNr ctermfg=DarkGray
-"highlight comment ctermfg=DarkGray
-"highlight CursorLineNr ctermfg=LightGray
+"""""""""""""""""""
+"  Custom Colors  "
+"""""""""""""""""""
+" dark colors for line number and comments
+highlight LineNr ctermfg=DarkGray
+highlight comment ctermfg=DarkGray
+highlight CursorLineNr ctermfg=LightGray
 
 """""""""""""""
-"  ultisnips  "
+"  Ultisnips  "
 """""""""""""""
 let g:UltiSnipsExpandTrigger             = "<tab>"
 let g:UltiSnipsJumpForwardTrigger        = "<tab>"
@@ -97,11 +115,11 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 """""""""""""""""""""
 "build
 " TODO: check if build integration exists in coc <28-01-20, Balamurali M> "
-noremap <C-cr> :Make<CR> 
+noremap <C-cr> :Make<CR>
 nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :Make!<CR>
 "quickfix window close
-nnoremap <leader>q :cclose<CR>
+nnoremap ,q :cclose<CR>
 
 " juggling with quickfix entries
 nnoremap <End>  :cnext<CR>
@@ -130,12 +148,11 @@ augroup setSpelling
   autocmd FileType markdown  setlocal spell spelllang=en_us
 augroup END
 
-""""""""""""
-""  nord  "
-""""""""""""
-let g:nord_italic                        = 1
-let g:nord_underline                     = 1
-let g:nord_italic_comments               = 1
-let g:nord_cursor_line_number_background = 1
-set cursorline
-colorscheme nord
+" search for visually selected text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" pynvim constant path
+let g:python3_host_prog = "/home/balu/.pyenv/versions/3.8.1/bin/python"
+
+" delete all buffers but current one
+nnoremap <leader>d :%bdelete\|edit#\|bdelete# <CR>
