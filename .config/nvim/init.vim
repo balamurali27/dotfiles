@@ -1,6 +1,4 @@
 set number relativenumber
-" copy from one vim instance to another
-" set clipboard=unnamedplus ; try using "+ for copy to system clipboard
 set foldlevelstart=99 foldmethod=syntax
 " reduce delay when going to normal mode from insert mode
 set timeoutlen=1000 ttimeoutlen=0
@@ -22,10 +20,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-rsi'
+" Plug 'tpope/vim-rsi'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'psliwka/vim-smoothie'
-
+Plug 'tpope/vim-unimpaired'
 """"""""
 "  LSP  "
 """""""""
@@ -155,4 +153,9 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 let g:python3_host_prog = "/home/balu/.pyenv/versions/3.8.1/bin/python"
 
 " delete all buffers but current one
-nnoremap <leader>d :%bdelete\|edit#\|bdelete# <CR>
+command! BufOnly execute '%bdelete|edit #|bdelete #|normal `"'
+nnoremap <leader>d :BufOnly<CR>
+
+" load project specific vim config
+set exrc
+set secure
