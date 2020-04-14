@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "coc-emoji": ">=1.2.3",
+    "coc-json": ">=1.2.5",
+    "coc-marketplace": ">=1.7.0",
+    "coc-pairs": ">=1.2.21",
+    "coc-python": ">=1.2.9",
+    "coc-snippets": ">=2.1.24",
+    "coc-tag": ">=1.2.4",
+    "django-snippets": "https://github.com/iambibhas/vscode-django-snippets",
+    "python-snippets": "https://github.com/cstrap/python-snippets"
+  }
+}
