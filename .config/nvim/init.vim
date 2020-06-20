@@ -1,16 +1,20 @@
-set number relativenumber
+set number relativenumber mouse=a
+"Don't show documentation on omnicomplete
+set completeopt-=preview
 set foldlevelstart=99 foldmethod=syntax
 " reduce delay when going to normal mode from insert mode
 set timeoutlen=1000 ttimeoutlen=0
 " switch buffers without writing
+set termguicolors
 set hidden
 " logical yank mapping
 :map Y y$
 
 call plug#begin()
 " Colour
-" Plug 'arcticicestudio/nord-vim'
-Plug 'nanotech/jellybeans.vim'
+Plug 'arcticicestudio/nord-vim'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'morhetz/gruvbox'
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -20,10 +24,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-abolish'
 " Plug 'tpope/vim-rsi'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-unimpaired'
+Plug 'sheerun/vim-polyglot'
+" Plug 'chiel92/vim-autoformat'
 """"""""
 "  LSP  "
 """""""""
@@ -49,26 +56,41 @@ call plug#end()
 "                                 appearance                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""
-"""  nord  "
-"""""""""""""
-"let g:nord_italic                        = 1
-"let g:nord_underline                     = 1
-"let g:nord_italic_comments               = 1
-"let g:nord_cursor_line_number_background = 1
+""""""""""""""""""""""""""""""""""""""
+""  Custom Colors for when no themes "
+""""""""""""""""""""""""""""""""""""""
+"" dark colors for line number and comments
+"highlight LineNr ctermfg=DarkGray
+"highlight comment ctermfg=DarkGray
+"highlight CursorLineNr ctermfg=LightGray
+
+""""""""""""
+""  gruvbox  "
+""""""""""""
+"colorscheme gruvbox
 "set cursorline
 
-""""""""""""""""
-"  jellybeans  "
-""""""""""""""""
-let g:jellybeans_overrides = {
-\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-\}
-if has('termguicolors') && &termguicolors
-    let g:jellybeans_overrides['background']['guibg'] = 'none'
-endif
-let g:jellybeans_use_term_italics = 1
-colorscheme jellybeans
+""""""""""""
+""  nord  "
+""""""""""""
+let g:nord_italic                        = 1
+let g:nord_underline                     = 1
+let g:nord_italic_comments               = 1
+let g:nord_cursor_line_number_background = 1
+set cursorline
+colorscheme nord
+
+"""""""""""""""""
+""  jellybeans  "
+"""""""""""""""""
+"let g:jellybeans_overrides = {
+"\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+"\}
+"if has('termguicolors') && &termguicolors
+"    let g:jellybeans_overrides['background']['guibg'] = 'none'
+"endif
+"let g:jellybeans_use_term_italics = 1
+"colorscheme jellybeans
 
 """""""""""""""
 "  gutentags  "
@@ -88,20 +110,13 @@ if executable('rg')
 	" set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-"""""""""""""""""""
-"  Custom Colors  "
-"""""""""""""""""""
-" dark colors for line number and comments
-highlight LineNr ctermfg=DarkGray
-highlight comment ctermfg=DarkGray
-highlight CursorLineNr ctermfg=LightGray
+""""""""""""""""
+""  Ultisnips  "
+""""""""""""""""
+" let g:UltiSnipsExpandTrigger             = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger        = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
 
-"""""""""""""""
-"  Ultisnips  "
-"""""""""""""""
-let g:UltiSnipsExpandTrigger             = "<tab>"
-let g:UltiSnipsJumpForwardTrigger        = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
 " let g:UltiSnipsEditSplit="tabdo"
 let g:snips_author                       = "Balamurali M"
 " make ultisnips look for private snippets in .UltiSnips directory in current workspace
@@ -113,7 +128,6 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 """""""""""""""""""""
 "build
 " TODO: check if build integration exists in coc <28-01-20, Balamurali M> "
-noremap <C-cr> :Make<CR>
 nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :Make!<CR>
 "quickfix window close
@@ -149,12 +163,15 @@ augroup END
 " search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
-" pynvim constant path
-let g:python3_host_prog = "/home/balu/.pyenv/versions/3.8.1/bin/python"
+" " pynvim constant path
+" let g:python3_host_prog = "/home/balu/.pyenv/versions/3.8.1/bin/python"
 
 " delete all buffers but current one
 command! BufOnly execute '%bdelete|edit #|bdelete #|normal `"'
 nnoremap <leader>d :BufOnly<CR>
+
+""Chiel92/Autoformat (don't need if coc enabled)
+"nnoremap <leader>f :Autoformat<CR>
 
 " load project specific vim config
 set exrc

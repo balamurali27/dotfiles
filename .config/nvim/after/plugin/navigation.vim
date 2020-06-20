@@ -3,7 +3,7 @@ nnoremap <space> <Nop>
 
 " wildmenu tweaks
 set wildignore=*.swp,*.bak
-set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
+set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*,*.sqlite
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=*.bin
@@ -11,6 +11,9 @@ set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
 set wildignore+=tags
 set wildignore+=*.tar.*
 set wildignore+=**/node_modules/**
+set wildignore+=**/site_packages/**
+set wildignore+=**/__pycache__/**,*/.venv/**
+set wildignore+=**/migrations/**
 set wildignore+=**/build/**
 set wildignore+=**/arduino-esp32/**
 set wildignore+=**/arduino/**
@@ -20,7 +23,7 @@ set wildignorecase
 set wildcharm=<C-z>
 
 " juggling with files
-set path=.,**,include
+set path=**
 set ignorecase
 set smartcase
 nnoremap <space>f :find <C-z><S-Tab>

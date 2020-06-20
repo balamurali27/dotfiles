@@ -23,5 +23,13 @@
 		}
 	},
 	"suggest.autoTrigger": "always",
-	"suggest.noselect": false
+	"suggest.noselect": false,
+	"coc.source.emoji.filetypes": [
+		"gitcommit",
+		"markdown"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${env:SPARK_HOME}/python",
+    "${env:SPARK_HOME}/python/pyspark"
+  ]
 }

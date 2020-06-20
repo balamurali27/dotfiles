@@ -96,18 +96,20 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias config='/usr/bin/git --git-dir=/home/balu/.myconf/ --work-tree=/home/balu'
 source /etc/profile.d/vte.sh
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/ruby/2.6.0/bin:$PATH"
+# Install Ruby Gems to ~/.gems
+# export GEM_HOME="$HOME/.gems"
+# export PATH="$GEM_HOME/ruby/bin:$PATH"
 #esp32 emulator
-export PATH="$HOME/Documents/code/esp-related/qemu/build/xtensa-softmmu:$PATH"
+# export PATH="$HOME/Documents/code/esp-related/qemu/build/xtensa-softmmu:$PATH"
 
 alias v=nvim
 # use triple commas so as to keep double quotes inside
 alias o='''mimeopen "`fzf`"'''
-alias vconfig="nvim ~/.config/nvim/init.vim"
+alias vconfig="nvim ~/.config/nvim/"
 alias vf="v \`fzf\`"
 alias todo="nvim ~/Documents/todo"
+alias today="nvim ~/Documents/work/today.md"
+alias someday="nvim ~/Documents/work/someday.md"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
 alias genrunner="ruby /home/balu/esp/Unity/auto/generate_test_runner.rb"
 
@@ -117,3 +119,4 @@ source /usr/share/fzf/completion.zsh
 #hub command autocomplete
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit
+
