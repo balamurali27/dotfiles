@@ -37,3 +37,7 @@ nnoremap <space>v :vimgrep /
 nnoremap <space>c :vimgrep <cword> ** <CR>
 nnoremap <space>j :tjump /
 
+" My remapping of <C-^>. If there is no alternate file, and there's no count given, then switch
+" to next file. We use `bufloaded` to check for alternate buffer presence. This will ignore
+" deleted buffers, as intended. To get default behaviour, use `bufexists` in it's place.
+nnoremap <silent> <C-n> :<C-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<CR>
