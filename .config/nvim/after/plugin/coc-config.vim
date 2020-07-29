@@ -145,6 +145,8 @@ nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <space>f :<C-u>CocList files<cr>
+nnoremap <silent><nowait> <space><space> :<C-u>CocList buffers<cr>
 
 "snippet config
 
