@@ -21,7 +21,7 @@ ZSH_THEME="alien-minimal/alien-minimal" #alien-minimal/alien-minimal,lambda-gits
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -62,7 +62,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python github)
+plugins=(git python github zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,14 +94,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias config='/usr/bin/git --git-dir=/home/balu/.myconf/ --work-tree=/home/balu'
-source /etc/profile.d/vte.sh
+
+
+# source /etc/profile.d/vte.sh
 # Install Ruby Gems to ~/.gems
 # export GEM_HOME="$HOME/.gems"
 # export PATH="$GEM_HOME/ruby/bin:$PATH"
 #esp32 emulator
 # export PATH="$HOME/Documents/code/esp-related/qemu/build/xtensa-softmmu:$PATH"
 
+alias config='/usr/bin/git --git-dir=/home/balu/.myconf/ --work-tree=/home/balu'
 alias v=nvim
 # use triple commas so as to keep double quotes inside
 alias o='''mimeopen "`fzf`"'''
@@ -120,3 +122,33 @@ source /usr/share/fzf/completion.zsh
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit
 
+n ()
+{
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, remove the "export" as in:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    # NOTE: NNN_TMPFILE is fixed, should not be modified
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}
+
+#load pyenv automatically
+eval "$(pyenv init -)"
