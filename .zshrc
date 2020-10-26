@@ -69,7 +69,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python github zsh-autosuggestions vi-mode)
+plugins=(git python github zsh-autosuggestions vi-mode fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -122,9 +122,6 @@ alias someday="nvim ~/Documents/work/someday.md"
 alias lg="lazygit"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
 alias genrunner="ruby /home/balu/esp/Unity/auto/generate_test_runner.rb"
-
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
 
 bindkey ^p up-line-or-beginning-search
 bindkey ^n down-line-or-beginning-search
