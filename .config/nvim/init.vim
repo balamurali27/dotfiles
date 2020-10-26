@@ -15,6 +15,7 @@ call plug#begin()
 Plug 'arcticicestudio/nord-vim'
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'morhetz/gruvbox'
+
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -36,6 +37,9 @@ Plug 'sheerun/vim-polyglot'
 "  LSP  "
 """""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"nginx
+Plug 'LeonB/vim-nginx'
 
 "disable search highlight after done
 Plug 'romainl/vim-cool'
@@ -174,6 +178,21 @@ nnoremap <leader>d :BufOnly<CR>
 ""Chiel92/Autoformat (don't need if coc enabled)
 "nnoremap <leader>f :Autoformat<CR>
 
-" load project specific vim config
-set exrc
-set secure
+" TEMPLATE to load project specific vim config(use separate file and load as after plugin)
+
+function! SetupEnvironment()
+	let l:path = expand('%:p')
+	if l:path =~ '/home/balu/project-a/'
+		"add common to all file config here with setlocal
+		if &filetype == 'python'
+			"options like compiler, makeprg, tabstop"
+		elseif &filetype == 'vue'
+			"vue specific options"
+		endif
+		"add subsequent project directories like this
+	elseif l:path =~ '/home/balu/project-b/'
+		"other project config
+	endif
+endfunction
+autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
+
