@@ -13,9 +13,7 @@ set hidden
 call plug#begin()
 " Colour
 Plug 'arcticicestudio/nord-vim'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'morhetz/gruvbox'
-
+Plug 'bignimbus/pop-punk.vim'
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -70,12 +68,6 @@ call plug#end()
 "highlight CursorLineNr ctermfg=LightGray
 
 """"""""""""
-""  gruvbox  "
-""""""""""""
-"colorscheme gruvbox
-"set cursorline
-
-""""""""""""
 ""  nord  "
 """"""""""""
 let g:nord_italic                        = 1
@@ -84,18 +76,6 @@ let g:nord_italic_comments               = 1
 let g:nord_cursor_line_number_background = 1
 set cursorline
 colorscheme nord
-
-"""""""""""""""""
-""  jellybeans  "
-"""""""""""""""""
-"let g:jellybeans_overrides = {
-"\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-"\}
-"if has('termguicolors') && &termguicolors
-"    let g:jellybeans_overrides['background']['guibg'] = 'none'
-"endif
-"let g:jellybeans_use_term_italics = 1
-"colorscheme jellybeans
 
 """""""""""""""
 "  gutentags  "
@@ -109,7 +89,6 @@ if executable('rg')
 	"ctags obey gitignore and faster
 	let g:gutentags_file_list_command = 'rg --files'
 
-	" TODO: check if this works <23-02-20, Balamurali M> "
 	" change grep default, (no idea how to use)
 	set grepprg=rg\ --vimgrep
 	" set grepformat=%f:%l:%c:%m,%f:%l:%m
@@ -132,7 +111,6 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 "  build integration  "
 """""""""""""""""""""
 "build
-" TODO: check if build integration exists in coc <28-01-20, Balamurali M> "
 nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :Make!<CR>
 "quickfix window close
