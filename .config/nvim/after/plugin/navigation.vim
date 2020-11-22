@@ -26,16 +26,16 @@ set wildcharm=<C-z>
 set path=**
 set ignorecase
 set smartcase
-nnoremap <space>f :find <C-z><S-Tab>
+" nnoremap <space>f :find <C-z><S-Tab>
 " nnoremap <space>f :find <C-R>=expand('%:h').'/'<CR>
 " nnoremap <space>f :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
 
 " juggling with buffers
-nnoremap <space><space> :buffer <C-z><S-Tab>
-nnoremap <space>r :grep <CR>
-nnoremap <space>v :vimgrep /
-nnoremap <space>c :vimgrep <cword> ** <CR>
-nnoremap <space>j :tjump /
+" nnoremap <space><space> :buffer <C-z><S-Tab>
+" nnoremap <space>r :grep <CR>
+" nnoremap <space>v :vimgrep /
+" nnoremap <space>c :vimgrep <cword> ** <CR>
+" nnoremap <space>j :tjump /
 
 " My remapping of <C-^>. If there is no alternate file, and there's no count given, then switch
 " to next file. We use `bufloaded` to check for alternate buffer presence. This will ignore
