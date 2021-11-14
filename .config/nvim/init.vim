@@ -22,6 +22,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
@@ -30,7 +31,13 @@ Plug 'tpope/vim-obsession'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'psliwka/vim-smoothie'
 Plug 'sheerun/vim-polyglot'
+Plug 'editorconfig/editorconfig-vim'
 " Plug 'chiel92/vim-autoformat'
+" Tests
+Plug 'airblade/vim-rooter'
+Plug 'vim-test/vim-test'
+Plug 'ankush/frappe_test.vim'
+
 """"""""
 "  LSP  "
 """""""""
@@ -173,4 +180,13 @@ function! SetupEnvironment()
 	endif
 endfunction
 autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
+
+
+let g:rooter_patterns = ['.git', 'package.json']
+
+let test#custom_runners = {'python': ['Frappe']}
+let test#enabled_runners = ["python#frappe"]
+let test#strategy = "make"
+
+let g:test#python#frappe#testsite = "frappe_cloud_test"  " important to specify your test site name here
 
