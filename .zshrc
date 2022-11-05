@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/balu/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,7 +69,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python github zsh-autosuggestions vi-mode fzf)
+plugins=(nvm node git python github zsh-autosuggestions vi-mode fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,7 +110,7 @@ source $ZSH/oh-my-zsh.sh
 #esp32 emulator
 # export PATH="$HOME/Documents/code/esp-related/qemu/build/xtensa-softmmu:$PATH"
 
-alias config='/usr/bin/git --git-dir=/home/balu/.myconf/ --work-tree=/home/balu'
+alias config='/usr/bin/git --git-dir=/home/$USER/.myconf/ --work-tree=/home/$USER'
 alias v=nvim
 # use triple commas so as to keep double quotes inside
 alias o='''mimeopen "`fzf`"'''
@@ -121,7 +121,7 @@ alias today="nvim ~/Documents/work/today.md"
 alias someday="nvim ~/Documents/work/someday.md"
 alias lg="lazygit"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
-alias genrunner="ruby /home/balu/esp/Unity/auto/generate_test_runner.rb"
+alias genrunner="ruby /home/$USER/esp/Unity/auto/generate_test_runner.rb"
 
 bindkey ^p up-line-or-beginning-search
 bindkey ^n down-line-or-beginning-search
@@ -161,8 +161,42 @@ n ()
     fi
 }
 
-#load pyenv automatically
-eval "$(pyenv init -)"
+
+#export PYENV_ROOT="$HOME/.pyenv"
+#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+
+# nvm loading
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# place this after nvm initialization! Pick up nvm version from .nvmrc in any directory
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
