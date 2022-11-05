@@ -1,6 +1,6 @@
 function! SetupEnvironment()
 	let l:path = expand('%:p')
-	if l:path =~ '/home/balu/Documents/code/frappe-bench/apps/'
+	if l:path =~ '/home/balu-work/Documents/code/frappe-bench/apps/'
 		"add common to all file config here with setlocal
 		if &filetype == 'python'
 			"add filetype specific like this
@@ -14,16 +14,16 @@ function! SetupEnvironment()
 			setlocal sw=2 sts=2 tabstop=8 expandtab
 		endif
 		"add subsequent project directories like this
-	elseif l:path =~ '/home/balu/Documents/code/agent/repo/'
+	elseif l:path =~ '/home/balu-work/Documents/code/agent/repo/'
 		setlocal makeprg=python\ -m\ unittest
 		compiler! pyunit
-	elseif l:path =~ '/home/balu/Documents/code/bench-repo/'
+	elseif l:path =~ '/home/balu-work/Documents/code/bench-repo/'
 		if &filetype == 'python'
 			setlocal sw=0 sts=0 tabstop=4 noexpandtab
 			" setlocal makeprg=python\ -m\ unittest\ %
 			compiler! pyunit
 		endif
-	elseif l:path =~ '/home/balu/projects'
+	elseif l:path =~ '/home/balu-work/projects'
 		setlocal tabstop=4 shiftwidth=4 noexpandtab
 	endif
 endfunction

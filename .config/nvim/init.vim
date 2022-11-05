@@ -12,7 +12,8 @@ set hidden
 
 call plug#begin()
 " Colour
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
+Plug 'shaunsingh/nord.nvim'
 Plug 'bignimbus/pop-punk.vim'
 " HTML
 Plug 'mattn/emmet-vim'
@@ -42,6 +43,14 @@ Plug 'ankush/frappe_test.vim'
 "  LSP  "
 """""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'github/copilot.vim'
+
+"search
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+" Plug 'fannheyward/telescope-coc.nvim'
 
 "nginx
 Plug 'LeonB/vim-nginx'
@@ -56,6 +65,7 @@ Plug 'junegunn/fzf.vim'
 " Writing
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'img-paste-devs/img-paste.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -77,10 +87,11 @@ call plug#end()
 """"""""""""
 ""  nord  "
 """"""""""""
-let g:nord_italic                        = 1
-let g:nord_underline                     = 1
-let g:nord_italic_comments               = 1
-let g:nord_cursor_line_number_background = 1
+let g:nord_contrast = v:false
+let g:nord_borders = v:true
+let g:nord_disable_background = v:false
+let g:nord_italic = v:true
+let g:nord_uniform_diff_background = v:true
 set cursorline
 colorscheme nord
 
@@ -181,6 +192,11 @@ function! SetupEnvironment()
 endfunction
 autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
 
+" Always copy sql to clipboard on save
+function! CopyBufferToClipboard()
+	:%y+
+endfunction
+autocmd! BufWritePost *.sql call CopyBufferToClipboard()
 
 let g:rooter_patterns = ['.git', 'package.json']
 
@@ -190,3 +206,26 @@ let test#strategy = "make"
 
 let g:test#python#frappe#testsite = "frappe_cloud_test"  " important to specify your test site name here
 
+""""""""""""""""""""""""
+"  Tree Sitter config  "
+""""""""""""""""""""""""
+lua require('treesitter')
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+" Disable treesitter for highlighting
+function! DisableTreeSitterHighlight()
+	:TSBufDisable highlight
+endfunction
+" Disable treesitter for highlighting markdown as comments aren't dulled out
+autocmd! BufEnter *.md call DisableTreeSitterHighlight()
+
+""""""""""""""""""
+"  md-img-paste  "
+""""""""""""""""""
+
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+let g:mdip_imgdir = 'img'
+let g:mdip_imgname = 'image'
