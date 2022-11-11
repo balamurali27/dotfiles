@@ -115,7 +115,7 @@ alias v=nvim
 # use triple commas so as to keep double quotes inside
 alias o='''mimeopen "`fzf`"'''
 alias vconfig="nvim ~/.config/nvim/"
-alias vf="v \`fzf\`"
+alias vf="v \`fzf --multi\`"
 alias todo="nvim ~/Documents/todo"
 alias today="nvim ~/Documents/work/today.md"
 alias someday="nvim ~/Documents/work/someday.md"
