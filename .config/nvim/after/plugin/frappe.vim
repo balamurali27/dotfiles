@@ -7,6 +7,7 @@ function! SetupEnvironment()
 			setlocal sw=0 sts=0 tabstop=4 noexpandtab
 			" setlocal makeprg=python\ -m\ unittest\ %
 			compiler! pyunit
+			set efm=%A\ \ File\ \"/home/balu-work/Documents/code/frappe-bench/apps/press/%f\"\\,\ line\ %l%.%#
 		elseif &filetype == 'vue'
 			setlocal sw=0 sts=0 tabstop=2 noexpandtab
 			setlocal makeprg=npx\ eslint\ %\ --fix 
