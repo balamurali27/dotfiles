@@ -148,7 +148,7 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 """""""""""""""""""""
 "build
 :let g:asyncrun_open = 8
-nnoremap <leader>b :AsyncRun -program=make -pos=tmux<CR>
+nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
 "quickfix window close
 nnoremap ,q :cclose<CR>
