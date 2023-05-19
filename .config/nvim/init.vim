@@ -1,4 +1,4 @@
-set number relativenumber mouse=a
+set number mouse=a
 "Don't show documentation on omnicomplete
 set completeopt-=preview
 set foldlevelstart=99 foldmethod=syntax
@@ -25,6 +25,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'preservim/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-obsession'
@@ -33,6 +35,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'psliwka/vim-smoothie'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'aserowy/tmux.nvim'
+Plug 'chrisgrieser/nvim-spider'
 " Plug 'chiel92/vim-autoformat'
 " Tests
 Plug 'airblade/vim-rooter'
@@ -43,14 +47,22 @@ Plug 'ankush/frappe_test.vim'
 "  LSP  "
 """""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'github/copilot.vim'
 
+""""""""""""""""
+"  treesitter  "
+""""""""""""""""
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'andymass/vim-matchup'
+Plug 'HiPhish/nvim-ts-rainbow2'
+
 "search
-" Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-" Plug 'fannheyward/telescope-coc.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
+Plug 'fannheyward/telescope-coc.nvim'
 
 "nginx
 Plug 'LeonB/vim-nginx'
@@ -62,10 +74,16 @@ Plug 'romainl/vim-cool'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Writing
+" Fancy
+Plug 'folke/twilight.nvim'
+Plug 'folke/zen-mode.nvim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+
+" Writing
 Plug 'img-paste-devs/img-paste.vim'
+Plug 'vimwiki/vimwiki'
+
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -129,8 +147,9 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 "  build integration  "
 """""""""""""""""""""
 "build
-nnoremap <leader>b :Make<CR>
-nnoremap <leader>B :Make!<CR>
+:let g:asyncrun_open = 8
+nnoremap <leader>b :AsyncRun -program=make -pos=tmux<CR>
+nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
 "quickfix window close
 nnoremap ,q :cclose<CR>
 
@@ -192,6 +211,8 @@ function! SetupEnvironment()
 endfunction
 autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
 
+let g:netrw_browsex_viewer="xdg-open"
+
 " Always copy sql to clipboard on save
 function! CopyBufferToClipboard()
 	:%y+
@@ -209,7 +230,7 @@ let g:test#python#frappe#testsite = "frappe_cloud_test"  " important to specify 
 """"""""""""""""""""""""
 "  Tree Sitter config  "
 """"""""""""""""""""""""
-lua require('treesitter')
+lua require('treesitter_config')
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -229,3 +250,69 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
 " there are some defaults for image directory and image name, you can change them
 let g:mdip_imgdir = 'img'
 let g:mdip_imgname = 'image'
+
+"""""""""""""
+"  vimwiki  "
+"""""""""""""
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" Don't treat all markdown files as part of vimwiki
+let g:vimwiki_global_ext = 0
+
+" Don't mess with autocomplete
+au filetype vimwiki silent! iunmap <buffer> <Tab>
+
+"""""""""""""""""
+"  nvim-spider  "
+"""""""""""""""""
+lua require('spider_config')
+
+"""""""""""""""""""""
+"  twilight config  "
+"""""""""""""""""""""
+
+lua << EOF
+  require("twilight").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
+lua << EOF
+  require("zen-mode").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
+""""""""""""""""""
+"  matchup conf  "
+""""""""""""""""""
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
+  },
+}
+EOF
+
+""""""""""""""
+"  rainbow2  "
+""""""""""""""
+lua <<EOF
+require('nvim-treesitter.configs').setup {
+  rainbow = {
+    enable = true,
+    -- list of languages you want to disable the plugin for
+    disable = { 'html' },
+    -- Which query to use for finding delimiters
+    query = 'rainbow-parens',
+    -- Highlight the entire buffer all at once
+    strategy = require('ts-rainbow').strategy.global,
+  }
+}
+EOF
