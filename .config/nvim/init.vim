@@ -25,6 +25,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'preservim/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
@@ -146,11 +147,36 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 """""""""""""""""""""
 "  build integration  "
 """""""""""""""""""""
-"b for build
+function! StartsWith(longer, shorter) abort
+  return a:longer[0:len(a:shorter)-1] ==# a:shorter
+endfunction
+
+function! SetMakePrg()
+	let path = expand('%:p')
+  " Get path to file from cwd and without extension. rooter required for correct root.
+  let path = fnamemodify(path, ':.:r')
+  let path = substitute(path, '\/', '.', 'g')
+	if StartsWith(expand('%:t'), 'test')
+		let make_cmd = "bench --site test_frappe_cloud run-tests --failfast --module " . l:path
+		let &makeprg= l:make_cmd
+	endif
+endfunction
+
 nnoremap <leader>n :TestNearest<CR>
-nnoremap <leader>b :TestFile<CR>
 nnoremap <leader>N :TestNearest -strategy=vimux<CR>
+nnoremap <leader>m :call SetMakePrg()<CR>
+"b for build
+nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :TestFile -strategy=vimux<CR>
+
+let g:rooter_patterns = ['.git']
+
+let test#custom_runners = {'python': ['Frappe']}
+let test#enabled_runners = ["python#frappe"]
+let g:test#strategy = "asyncrun_background"
+
+let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
+let g:test#python#frappe#arguments = "--skip-before-tests --failfast"  " arguments to run-test function
 
 "quickfix window close
 nnoremap ,q :cclose<CR>
@@ -220,15 +246,6 @@ function! CopyBufferToClipboard()
 	:%y+
 endfunction
 autocmd! BufWritePost *.sql call CopyBufferToClipboard()
-
-let g:rooter_patterns = ['.git']
-
-let test#custom_runners = {'python': ['Frappe']}
-let test#enabled_runners = ["python#frappe"]
-let g:test#strategy = "dispatch"
-
-let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
-let g:test#python#frappe#arguments = "--skip-before-tests --failfast"  " arguments to run-test function
 
 """"""""""""""""""""""""
 "  Tree Sitter config  "
