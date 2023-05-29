@@ -25,7 +25,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-dispatch'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'preservim/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
@@ -148,10 +147,8 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 "  build integration  "
 """""""""""""""""""""
 "b for build
-:let g:asyncrun_open = 8
 nnoremap <leader>n :TestNearest<CR>
 nnoremap <leader>b :TestFile<CR>
-" nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
 nnoremap <leader>N :TestNearest -strategy=vimux<CR>
 nnoremap <leader>B :TestFile -strategy=vimux<CR>
 
