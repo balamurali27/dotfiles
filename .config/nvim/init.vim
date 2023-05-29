@@ -79,6 +79,7 @@ Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'wakatime/vim-wakatime'
 
 " Writing
 Plug 'img-paste-devs/img-paste.vim'
@@ -146,10 +147,14 @@ let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,
 """""""""""""""""""""
 "  build integration  "
 """""""""""""""""""""
-"build
+"b for build
 :let g:asyncrun_open = 8
-nnoremap <leader>b :Make<CR>
-nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
+nnoremap <leader>n :TestNearest<CR>
+nnoremap <leader>b :TestFile<CR>
+" nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
+nnoremap <leader>N :TestNearest -strategy=vimux<CR>
+nnoremap <leader>B :TestFile -strategy=vimux<CR>
+
 "quickfix window close
 nnoremap ,q :cclose<CR>
 
@@ -219,13 +224,14 @@ function! CopyBufferToClipboard()
 endfunction
 autocmd! BufWritePost *.sql call CopyBufferToClipboard()
 
-let g:rooter_patterns = ['.git', 'package.json']
+let g:rooter_patterns = ['.git']
 
 let test#custom_runners = {'python': ['Frappe']}
 let test#enabled_runners = ["python#frappe"]
-let test#strategy = "make"
+let g:test#strategy = "dispatch"
 
-let g:test#python#frappe#testsite = "frappe_cloud_test"  " important to specify your test site name here
+let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
+let g:test#python#frappe#arguments = "--skip-before-tests --failfast"  " arguments to run-test function
 
 """"""""""""""""""""""""
 "  Tree Sitter config  "
