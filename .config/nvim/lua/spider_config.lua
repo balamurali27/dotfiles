@@ -9,7 +9,7 @@ vim.keymap.set({"n"}, "dw", "de", {remap = true, desc = "Spider-dw"})
 vim.keymap.set({"n"}, "cw", "ce", {remap = true, desc = "Spider-cw"})
 
 -- Insert mode maps
-vim.keymap.set("i", "<C-w>", "<Esc>diwi", { remap = true })
+vim.keymap.set("i", "<C-w>", "<Esc>ciw", { remap = true })
 
 
 -- default values
