@@ -37,6 +37,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'aserowy/tmux.nvim'
 Plug 'chrisgrieser/nvim-spider'
+Plug 'chrisgrieser/nvim-various-textobjs'
 " Plug 'chiel92/vim-autoformat'
 " Tests
 Plug 'airblade/vim-rooter'
@@ -157,17 +158,18 @@ function! SetMakePrg()
   let path = fnamemodify(path, ':.:r')
   let path = substitute(path, '\/', '.', 'g')
 	if StartsWith(expand('%:t'), 'test')
-		let make_cmd = "bench --site test_frappe_cloud run-tests --failfast --module " . l:path
+		let make_cmd = "bench --site test_frappe_cloud run-tests --module " . l:path
 		let &makeprg= l:make_cmd
 	endif
 endfunction
 
-nnoremap <leader>n :TestNearest<CR>
+:let g:asyncrun_open = 8
+nnoremap <leader>n :TestNearest -strategy=asyncrun_background<CR>
 nnoremap <leader>N :TestNearest -strategy=vimux<CR>
 nnoremap <leader>m :call SetMakePrg()<CR>
 "b for build
 nnoremap <leader>b :Make<CR>
-nnoremap <leader>B :TestFile -strategy=vimux<CR>
+nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
 
 let g:rooter_patterns = ['.git']
 
@@ -176,7 +178,7 @@ let test#enabled_runners = ["python#frappe"]
 let g:test#strategy = "asyncrun_background"
 
 let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
-let g:test#python#frappe#arguments = "--skip-before-tests --failfast"  " arguments to run-test function
+let g:test#python#frappe#arguments = "--failfast"  " arguments to run-test function
 
 "quickfix window close
 nnoremap ,q :cclose<CR>
@@ -286,6 +288,7 @@ au filetype vimwiki silent! iunmap <buffer> <Tab>
 """""""""""""""""
 "  nvim-spider  "
 """""""""""""""""
+lua require('various_textobjs_config')
 lua require('spider_config')
 
 """""""""""""""""""""
