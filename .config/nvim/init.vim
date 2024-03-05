@@ -1,4 +1,5 @@
 set number mouse=a
+set cpoptions+=y "Make yank repeatable with .
 "Don't show documentation on omnicomplete
 set completeopt-=preview
 set foldlevelstart=99 foldmethod=syntax
