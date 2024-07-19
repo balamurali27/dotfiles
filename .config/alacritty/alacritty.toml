@@ -53,7 +53,7 @@ text = "#2e3440"
 size = 14.0
 
 [font.normal]
-family = "IosevkaTerm Nerd Font Mono"
+family = "IosevkaTerm "
 
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
