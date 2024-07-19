@@ -18,6 +18,7 @@ Plug 'shaunsingh/nord.nvim'
 Plug 'bignimbus/pop-punk.vim'
 " HTML
 Plug 'mattn/emmet-vim'
+Plug 'glench/vim-jinja2-syntax'
 
 " Coding
 Plug 'tpope/vim-commentary'
@@ -31,6 +32,7 @@ Plug 'preservim/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-speeddating'
 " Plug 'tpope/vim-rsi'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'psliwka/vim-smoothie'
@@ -58,7 +60,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'andymass/vim-matchup'
-Plug 'HiPhish/nvim-ts-rainbow2'
+Plug 'hiphish/rainbow-delimiters.nvim'
 
 "search
 Plug 'kyazdani42/nvim-web-devicons'
@@ -146,54 +148,6 @@ let g:snips_author                       = "Balamurali M"
 let g:UltiSnipsSnippetsDir               = ".UltiSnips"
 let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal", "UltiSnips"]
 
-"""""""""""""""""""""
-"  build integration  "
-"""""""""""""""""""""
-function! StartsWith(longer, shorter) abort
-  return a:longer[0:len(a:shorter)-1] ==# a:shorter
-endfunction
-
-function! SetMakePrg()
-	let path = expand('%:p')
-  " Get path to file from cwd and without extension. rooter required for correct root.
-  let path = fnamemodify(path, ':.:r')
-  let path = substitute(path, '\/', '.', 'g')
-	if StartsWith(expand('%:t'), 'test')
-		let make_cmd = "bench --site test_frappe_cloud run-tests --module " . l:path
-		let &makeprg= l:make_cmd
-	endif
-endfunction
-
-:let g:asyncrun_open = 8
-nnoremap <leader>n :TestNearest -strategy=asyncrun_background<CR>
-nnoremap <leader>N :TestNearest -strategy=vimux<CR>
-nnoremap <leader>m :call SetMakePrg()<CR>
-"b for build
-nnoremap <leader>b :Make<CR>
-nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
-
-let g:rooter_patterns = ['.git']
-
-let test#custom_runners = {'python': ['Frappe']}
-let test#enabled_runners = ["python#frappe"]
-let g:test#strategy = "asyncrun_background"
-
-let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
-let g:test#python#frappe#arguments = "--failfast"  " arguments to run-test function
-
-"quickfix window close
-nnoremap ,q :cclose<CR>
-
-" juggling with quickfix entries
-nnoremap <End>  :cnext<CR>
-nnoremap <Home> :cprevious<CR>
-
-" close quickfix window if its the last one
-augroup QFClose
-  autocmd!
-  autocmd WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
-augroup END
-
 " zeal mapping
 if executable('zeal')
 	nnoremap gz :!zeal "<cword>"&<CR><CR>
@@ -240,7 +194,7 @@ function! SetupEnvironment()
 		"other project config
 	endif
 endfunction
-autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
+autocmd! BufReadPost,BufNewFile *.py call SetupEnvironment()
 
 let g:netrw_browsex_viewer="xdg-open"
 
@@ -264,6 +218,7 @@ function! DisableTreeSitterHighlight()
 endfunction
 " Disable treesitter for highlighting markdown as comments aren't dulled out
 autocmd! BufEnter *.md call DisableTreeSitterHighlight()
+
 
 """"""""""""""""""
 "  md-img-paste  "
@@ -316,27 +271,62 @@ EOF
 "  matchup conf  "
 """"""""""""""""""
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
+lua << EOF
+require('nvim-treesitter.configs').setup {
   matchup = {
     enable = true,              -- mandatory, false will disable the whole extension
   },
 }
 EOF
 
-""""""""""""""
-"  rainbow2  "
-""""""""""""""
-lua <<EOF
-require('nvim-treesitter.configs').setup {
-  rainbow = {
-    enable = true,
-    -- list of languages you want to disable the plugin for
-    disable = { 'html' },
-    -- Which query to use for finding delimiters
-    query = 'rainbow-parens',
-    -- Highlight the entire buffer all at once
-    strategy = require('ts-rainbow').strategy.global,
-  }
-}
-EOF
+"""""""""""""""""""""
+"  build integration  "
+"""""""""""""""""""""
+function! StartsWith(longer, shorter) abort
+  return a:longer[0:len(a:shorter)-1] ==# a:shorter
+endfunction
+
+function! SetMakePrg()
+	let path = expand('%:p')
+  " Get path to file from cwd and without extension. rooter required for correct root.
+  let path = fnamemodify(path, ':.:r')
+  let path = substitute(path, '\/', '.', 'g')
+	if StartsWith(expand('%:t'), 'test')
+		let make_cmd = "bench --site test_frappe_cloud run-tests --failfast --module " . l:path
+		let &makeprg= l:make_cmd
+	endif
+endfunction
+
+let g:asyncrun_open = 8
+
+nnoremap <leader>n :TestNearest -strategy=asyncrun_background<CR>
+nnoremap <leader>N :TestNearest -strategy=vimux<CR>
+nnoremap <leader>m :call SetMakePrg()<CR>
+nnoremap <leader>mm :call SetMakePrg()<CR>:call <SNR>101_Python_jump('n','\v^\s*(class\|def\|async\ def)>','Wb',v:count1)<CR>w"8yt(:set makeprg+=\ --test\ <C-R>8<CR><c-o>
+"b for build
+nnoremap <leader>b :Make<CR>
+nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
+
+let g:rooter_patterns = ['.git']
+
+let test#custom_runners = {'python': ['Frappe']}
+let test#enabled_runners = ["python#frappe"]
+let g:test#strategy = "asyncrun_background"
+
+let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
+let g:test#python#frappe#arguments = "--failfast"  " arguments to run-test function
+
+"quickfix window close
+nnoremap ,q :cclose<CR>
+
+" juggling with quickfix entries
+nnoremap <End>  :cnext<CR>
+nnoremap <Home> :cprevious<CR>
+
+" " close quickfix window if its the last one
+" augroup QFClose
+"   autocmd!
+"   autocmd WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
+" augroup END
+
+
