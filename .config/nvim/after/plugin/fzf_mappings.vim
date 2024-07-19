@@ -8,7 +8,7 @@ nnoremap <space><space> :Buffers<cr>
 "" fuzzy find text in the working directory
 nnoremap <space>r :Rg 
 "" fuzzy find Vim commands (like Ctrl-Shift-P in Sublime/Atom/VSC)
-" nnoremap <space>c :Commands<cr>
+nnoremap <space>c :Commands<cr>
 "" fuzzy find tags/symbols in the current project
 nnoremap <space>s :Tags<cr>
 

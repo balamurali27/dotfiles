@@ -21,5 +21,6 @@
   "suggest.noselect": false,
   "coc.source.emoji.filetypes": ["gitcommit", "markdown", "text"],
   "pyright.enable": true,
-  "python.analysis.typeCheckingMode": "off"
+  "python.analysis.typeCheckingMode": "off",
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/18.1.3/clangd_18.1.3/bin/clangd"
 }
