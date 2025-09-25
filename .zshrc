@@ -111,6 +111,7 @@ source $ZSH/oh-my-zsh.sh
 # export PATH="$HOME/Documents/code/esp-related/qemu/build/xtensa-softmmu:$PATH"
 
 alias config='/usr/bin/git --git-dir=/home/$USER/.myconf/ --work-tree=/home/$USER'
+alias configv='GIT_DIR=$HOME/.myconf GIT_WORK_TREE=$HOME nvim'
 alias v=nvim
 # use triple commas so as to keep double quotes inside
 alias o='''mimeopen "`fzf`"'''
