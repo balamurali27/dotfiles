@@ -69,7 +69,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(nvm node git python github zsh-autosuggestions vi-mode fzf)
+plugins=(nvm node git python github zsh-autosuggestions vi-mode fzf direnv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -122,12 +122,17 @@ alias someday="nvim ~/Documents/work/someday.md"
 alias lg="lazygit"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
 alias genrunner="ruby /home/$USER/esp/Unity/auto/generate_test_runner.rb"
+alias gc="git commit"
+alias gce="git commit --edit --file=.git/COMMIT_EDITMSG"
+alias ghc="gh copilot suggest "
+alias ghce="gh copilot explain "
 
 bindkey ^p up-line-or-beginning-search
 bindkey ^n down-line-or-beginning-search
 
 #forgit
 source $ZSH_CUSTOM/plugins/forgit/forgit.plugin.zsh
+export FORGIT_FZF_DEFAULT_OPTS
 
 #hub command autocomplete
 fpath=(~/.zsh/completions $fpath) 
@@ -162,9 +167,22 @@ n ()
 }
 
 
-#export PYENV_ROOT="$HOME/.pyenv"
-#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-#eval "$(pyenv init -)"
+# Load pyenv automatically by appending
+# the following to
+# ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+# Restart your shell for the changes to take effect.
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
+
 
 # nvm loading
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
