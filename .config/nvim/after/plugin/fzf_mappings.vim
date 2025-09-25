@@ -11,4 +11,5 @@ nnoremap <space>r :Rg
 nnoremap <space>c :Commands<cr>
 "" fuzzy find tags/symbols in the current project
 nnoremap <space>s :Tags<cr>
-
+"" Search for a string with ripgrep
+nnoremap # :Rg <c-r><c-w><cr>

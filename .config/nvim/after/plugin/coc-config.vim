@@ -118,7 +118,7 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -156,14 +156,14 @@ let g:coc_global_extensions = ['coc-css', 'coc-diagnostic', 'coc-emoji', 'coc-gi
 """""""""""""""""""""""""""""""
 "  config for telescope-nvim  "
 """""""""""""""""""""""""""""""
-lua << EOF
-require("telescope").setup({
-  extensions = {
-    coc = {
-        theme = 'ivy',
-        prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
-    }
-  },
-})
-require('telescope').load_extension('coc')
-EOF
+" lua << EOF
+" require("telescope").setup({
+"   extensions = {
+"     coc = {
+"         theme = 'ivy',
+"         prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+"     }
+"   },
+" })
+" require('telescope').load_extension('coc')
+" EOF
