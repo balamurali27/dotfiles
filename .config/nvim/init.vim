@@ -15,6 +15,7 @@ call plug#begin()
 " Colour
 " Plug 'arcticicestudio/nord-vim'
 Plug 'shaunsingh/nord.nvim'
+" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'bignimbus/pop-punk.vim'
 " HTML
 Plug 'mattn/emmet-vim'
@@ -27,12 +28,15 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-dispatch'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'preservim/vimux'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-projectionist'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'preservim/vimux'
 " Plug 'tpope/vim-rsi'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'psliwka/vim-smoothie'
@@ -46,13 +50,18 @@ Plug 'chrisgrieser/nvim-various-textobjs'
 Plug 'airblade/vim-rooter'
 Plug 'vim-test/vim-test'
 Plug 'ankush/frappe_test.vim'
+Plug 'psliwka/vim-dirtytalk', { 'do': ':DirtytalkUpdate' }
 
 """"""""
 "  LSP  "
 """""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+""""""""
+"  ai  "
+""""""""
 Plug 'github/copilot.vim'
-
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
 """"""""""""""""
 "  treesitter  "
 """"""""""""""""
@@ -60,13 +69,14 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'andymass/vim-matchup'
+Plug 'AndrewRadev/switch.vim'
 Plug 'hiphish/rainbow-delimiters.nvim'
 
 "search
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
-Plug 'fannheyward/telescope-coc.nvim'
+" Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
+" Plug 'fannheyward/telescope-coc.nvim'
 
 "nginx
 Plug 'LeonB/vim-nginx'
@@ -91,7 +101,7 @@ Plug 'vimwiki/vimwiki'
 
 
 " Snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 call plug#end()
 
@@ -118,6 +128,17 @@ let g:nord_uniform_diff_background = v:true
 set cursorline
 colorscheme nord
 
+" colorscheme catppuccin-macchiato " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   spell                                    "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set spelllang=en,programming
+set spell
+set spelloptions+=camel
+
+
 """""""""""""""
 "  gutentags  "
 """""""""""""""
@@ -138,15 +159,28 @@ endif
 """"""""""""""""
 ""  Ultisnips  "
 """"""""""""""""
-let g:UltiSnipsExpandTrigger             = "<tab>"
-let g:UltiSnipsJumpForwardTrigger        = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
+" let g:UltiSnipsExpandTrigger             = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger        = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger       = "<s-tab>"
 
 " let g:UltiSnipsEditSplit="tabdo"
-let g:snips_author                       = "Balamurali M"
+" let g:snips_author                       = "Balamurali M"
 " make ultisnips look for private snippets in .UltiSnips directory in current workspace
-let g:UltiSnipsSnippetsDir               = ".UltiSnips"
-let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal", "UltiSnips"]
+" let g:UltiSnipsSnippetsDir               = ".UltiSnips"
+" let g:UltiSnipsSnippetDirectories        = [getcwd()."/".g:UltiSnipsSnippetsDir,"UltiSnips/personal", "UltiSnips"]
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " zeal mapping
 if executable('zeal')
@@ -279,6 +313,15 @@ require('nvim-treesitter.configs').setup {
 }
 EOF
 
+""""""""""""""""""
+"  copilot chat  "
+""""""""""""""""""
+lua << EOF
+require("CopilotChat").setup {
+  -- See Configuration section for options
+}
+EOF
+
 """""""""""""""""""""
 "  build integration  "
 """""""""""""""""""""
@@ -292,7 +335,7 @@ function! SetMakePrg()
   let path = fnamemodify(path, ':.:r')
   let path = substitute(path, '\/', '.', 'g')
 	if StartsWith(expand('%:t'), 'test')
-		let make_cmd = "bench --site test_frappe_cloud run-tests --failfast --module " . l:path
+		let make_cmd = "bench --site test_frappe_cloud run-tests --debug --failfast --module " . l:path
 		let &makeprg= l:make_cmd
 	endif
 endfunction
@@ -302,7 +345,7 @@ let g:asyncrun_open = 8
 nnoremap <leader>n :TestNearest -strategy=asyncrun_background<CR>
 nnoremap <leader>N :TestNearest -strategy=vimux<CR>
 nnoremap <leader>m :call SetMakePrg()<CR>
-nnoremap <leader>mm :call SetMakePrg()<CR>:call <SNR>101_Python_jump('n','\v^\s*(class\|def\|async\ def)>','Wb',v:count1)<CR>w"8yt(:set makeprg+=\ --test\ <C-R>8<CR><c-o>
+" nnoremap <leader>mm :call SetMakePrg()<CR>:call <SNR>101_Python_jump('n','\v^\s*(class\|def\|async\ def)>','Wb',v:count1)<CR>w"8yt(:set makeprg+=\ --test\ <C-R>8<CR><c-o>
 "b for build
 nnoremap <leader>b :Make<CR>
 nnoremap <leader>B :AsyncRun -program=make -pos=tmux -mode=term<CR>
@@ -314,7 +357,7 @@ let test#enabled_runners = ["python#frappe"]
 let g:test#strategy = "asyncrun_background"
 
 let g:test#python#frappe#testsite = "test_frappe_cloud"  " important to specify your test site name here
-let g:test#python#frappe#arguments = "--failfast"  " arguments to run-test function
+let g:test#python#frappe#arguments = "--failfast --debug"  " arguments to run-test function
 
 "quickfix window close
 nnoremap ,q :cclose<CR>
@@ -322,6 +365,7 @@ nnoremap ,q :cclose<CR>
 " juggling with quickfix entries
 nnoremap <End>  :cnext<CR>
 nnoremap <Home> :cprevious<CR>
+nnoremap <leader> qf :cdo <CR>
 
 " " close quickfix window if its the last one
 " augroup QFClose
