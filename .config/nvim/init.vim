@@ -22,7 +22,7 @@ Plug 'mattn/emmet-vim'
 Plug 'glench/vim-jinja2-syntax'
 
 " Coding
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -51,6 +51,7 @@ Plug 'airblade/vim-rooter'
 Plug 'vim-test/vim-test'
 Plug 'ankush/frappe_test.vim'
 Plug 'psliwka/vim-dirtytalk', { 'do': ':DirtytalkUpdate' }
+Plug 'pwntester/octo.nvim'
 
 """"""""
 "  LSP  "
@@ -68,7 +69,7 @@ Plug 'CopilotC-Nvim/CopilotChat.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'andymass/vim-matchup'
+"Plug 'andymass/vim-matchup'
 Plug 'AndrewRadev/switch.vim'
 Plug 'hiphish/rainbow-delimiters.nvim'
 
@@ -241,17 +242,16 @@ autocmd! BufWritePost *.sql call CopyBufferToClipboard()
 """"""""""""""""""""""""
 "  Tree Sitter config  "
 """"""""""""""""""""""""
-lua require('treesitter_config')
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 " Disable treesitter for highlighting
-function! DisableTreeSitterHighlight()
-	:TSBufDisable highlight
-endfunction
+" function! DisableTreeSitterHighlight()
+	" :TSBufDisable highlight
+" endfunction
 " Disable treesitter for highlighting markdown as comments aren't dulled out
-autocmd! BufEnter *.md call DisableTreeSitterHighlight()
+" autocmd! BufEnter *.md call DisableTreeSitterHighlight()
 
 
 """"""""""""""""""
@@ -305,14 +305,14 @@ EOF
 "  matchup conf  "
 """"""""""""""""""
 
-lua << EOF
-require('nvim-treesitter.configs').setup {
-  matchup = {
-    enable = true,              -- mandatory, false will disable the whole extension
-  },
-}
-EOF
-
+"lua << EOF
+"require('nvim-treesitter.configs').setup {
+"  matchup = {
+"    enable = true,              -- mandatory, false will disable the whole extension
+"  },
+"}
+"EOF
+"
 """"""""""""""""""
 "  copilot chat  "
 """"""""""""""""""
