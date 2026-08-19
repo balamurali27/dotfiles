@@ -69,7 +69,9 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(nvm node git python github zsh-autosuggestions vi-mode fzf direnv)
+plugins=(git gitfast python gh zsh-autosuggestions vi-mode fzf direnv docker)
+
+export DIRENV_LOG_FORMAT=
 
 source $ZSH/oh-my-zsh.sh
 
@@ -117,16 +119,19 @@ alias v=nvim
 alias o='''mimeopen "`fzf`"'''
 alias vconfig="nvim ~/.config/nvim/"
 alias vf="v \`fzf --multi\`"
-alias todo="nvim ~/Documents/todo"
-alias today="nvim ~/Documents/work/today.md"
 alias someday="nvim ~/Documents/work/someday.md"
 alias lg="lazygit"
 alias rtags="rg --files | ctags -R -L - --exclude=@ctags_exclude_list"
 alias genrunner="ruby /home/$USER/esp/Unity/auto/generate_test_runner.rb"
 alias gc="git commit"
 alias gce="git commit --edit --file=.git/COMMIT_EDITMSG"
+alias ghpr="gh pr create --fill-verbose"
 alias ghc="gh copilot suggest "
 alias ghce="gh copilot explain "
+alias qwen="claude --settings ~/.claude/settings.json.qwen"
+# alias steam command to block steam from opening before 8 PM and after 10 PM on weekdays (Monday to Friday)
+# alias steam='if [[ $(date +%u) -le 5 && ( $(date +%H) -lt 20 || $(date +%H) -gt 22 ) ]]; then echo "Steam is blocked from opening between 8 PM and 10 PM, Monday to Friday"; else /usr/bin/steam; fi'
+
 
 bindkey ^p up-line-or-beginning-search
 bindkey ^n down-line-or-beginning-search
@@ -219,3 +224,6 @@ export PATH
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# opencode
+export PATH=/home/balu-work/.opencode/bin:$PATH

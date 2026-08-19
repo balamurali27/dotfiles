@@ -8,3 +8,4 @@ export BROWSER='/usr/bin/firefox'
 export PYTHONBREAKPOINT=ipdb.set_trace
 export FORGIT_COPY_CMD='wl-copy'
 export DIRENV_LOG_FORMAT=''
+export KWIN_USE_OVERLAYS=1
