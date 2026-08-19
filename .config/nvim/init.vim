@@ -143,7 +143,9 @@ set spelloptions+=camel
 """""""""""""""
 "  gutentags  "
 """""""""""""""
-let g:gutentags_ctags_tagfile = '.git/tags'
+" Not '.git/tags': in a git worktree .git is a file, so that path is unwritable.
+" cache_dir keeps tags out of the tree and works in worktrees and non-git dirs.
+let g:gutentags_cache_dir = stdpath('cache') . '/tags'
 
 """"""""""""""""""""""
 "  ripgrep optimize  "
